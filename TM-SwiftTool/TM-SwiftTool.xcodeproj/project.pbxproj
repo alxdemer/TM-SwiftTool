@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */ = {isa = PBXBuildFile; productRef = 4210B2BA29071224000A7F0E /* DeviceGuru */; };
 		42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */; };
 		42C444DF29006903000BE3B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* ContentView.swift */; };
 		42C444E129006905000BE3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C444E029006905000BE3B2 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +147,9 @@
 			dependencies = (
 			);
 			name = "TM-SwiftTool";
+			packageProductDependencies = (
+				4210B2BA29071224000A7F0E /* DeviceGuru */,
+			);
 			productName = "TM-SwiftTool";
 			productReference = 42C444D929006903000BE3B2 /* TM-SwiftTool.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +222,9 @@
 				Base,
 			);
 			mainGroup = 42C444D029006903000BE3B2;
+			packageReferences = (
+				4210B2B929071224000A7F0E /* XCRemoteSwiftPackageReference "DeviceGuru" */,
+			);
 			productRefGroup = 42C444DA29006903000BE3B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -568,6 +576,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4210B2B929071224000A7F0E /* XCRemoteSwiftPackageReference "DeviceGuru" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/InderKumarRathore/DeviceGuru";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4210B2BA29071224000A7F0E /* DeviceGuru */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4210B2B929071224000A7F0E /* XCRemoteSwiftPackageReference "DeviceGuru" */;
+			productName = DeviceGuru;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42C444D129006903000BE3B2 /* Project object */;
 }

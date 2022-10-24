@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "deviceguru",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/InderKumarRathore/DeviceGuru",
+      "state" : {
+        "revision" : "12216549ba48a3c201b33cac99da06e40858531c",
+        "version" : "8.0.2"
+      }
+    }
+  ],
+  "version" : 2
+}

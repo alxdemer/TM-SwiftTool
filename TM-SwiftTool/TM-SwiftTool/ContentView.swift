@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import DeviceGuru
 
 struct ContentView: View {
     
     //get computer hostname
-    let currentHost = Host.current().localizedName ?? ""
+    let systemHostName = ProcessInfo.processInfo.hostName
     let userName = NSUserName()
-    var systemVersion = ProcessInfo.processInfo.operatingSystemVersionString
-    //var systemType = ProcessInfo.processInfo.
+    let systemVersion = ProcessInfo.processInfo.operatingSystemVersionString
+    let hardware = ProcessInfo.processInfo.description
+    let systemArchitecture = DeviceGuru().hardwareString()
+    
     
     var body: some View {
         VStack {
@@ -23,10 +26,12 @@ struct ContentView: View {
                 Text("System Info:")
                     .underline()
                     .padding()
+                    .font(.system(size: 15, weight: .bold))
                 
                 Text("Hardware Info:")
                     .underline()
                     .padding()
+                    .font(.system(size: 15, weight: .bold))
             }
             .padding()
             
@@ -34,10 +39,11 @@ struct ContentView: View {
             {
                 VStack
                 {
-                    Text("Hostname: " + currentHost)
+                    
+                    Text("Hostname: " + systemHostName)
                     Text("Username: " + userName)
                     Text("MacOS: " + systemVersion)
-                    //Text("System Type: " + systemType)
+                    Text("System Architecture: " + systemArchitecture)
                 }
                 VStack
                 {
