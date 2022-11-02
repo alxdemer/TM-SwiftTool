@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVKit
 import DeviceGuru
 
 struct ContentView: View {
@@ -16,7 +17,8 @@ struct ContentView: View {
     let systemVersion = ProcessInfo.processInfo.operatingSystemVersionString
     let hardware = ProcessInfo.processInfo.description
     let systemArchitecture = DeviceGuru().hardwareString()
-    
+    @State var audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "song", ofType: "mp3")!))
+    @State var testAudioImage = "play.circle.fill"
     
     var body: some View {
         VStack {
@@ -61,20 +63,46 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text("Serial: " + getMacSerial())
                         .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Processor: " + getMacProcessor())
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     
                 }
             }
             
-            
-            Button()
+            HStack()
             {
+                Button()
+                {
+                    
+                }
+                label:
+                {
+                    Image(systemName: "checkmark.square.fill")
+                    Text("Senior Review")
+                    
+                }
                 
-            }
-            label:
-            {
-                Image(systemName: "play.circle.fill")
-                Text("Senior Review")
-                
+                Button()
+                {
+                    if (!self.audioPlayer.isPlaying)
+                    {
+                        testAudioImage = "stop.circle.fill"
+                        self.audioPlayer.play()
+                        shell("osascript -e \"set Volume 3\"")
+                    }
+                    else
+                    {
+                        testAudioImage = "play.circle.fill"
+                        self.audioPlayer.stop()
+                    }
+                }
+                label:
+                {
+                    
+                    Image(systemName: testAudioImage)
+                    Text("Test Audio")
+                    
+                }
             }
             
         }
@@ -138,6 +166,18 @@ struct ContentView: View {
         let serial = commandShellResponse[range]
         
         return serial
+    }
+    
+    public func getMacProcessor() -> String.SubSequence
+    {
+        let commandShellResponse = shell("sysctl -n machdep.cpu.brand_string")
+        let start = commandShellResponse.index(commandShellResponse.startIndex, offsetBy: 0)
+        let end = commandShellResponse.index(commandShellResponse.endIndex, offsetBy: -1)
+        let range = start..<end
+        
+        let processor = commandShellResponse[range]
+        
+        return processor
     }
     
 

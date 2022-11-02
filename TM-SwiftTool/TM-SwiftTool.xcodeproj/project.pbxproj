@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */ = {isa = PBXBuildFile; productRef = 4210B2BA29071224000A7F0E /* DeviceGuru */; };
+		4210BF362912EEED003ED54B /* song.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4210BF352912EEED003ED54B /* song.mp3 */; };
 		42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */; };
 		42C444DF29006903000BE3B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* ContentView.swift */; };
 		42C444E129006905000BE3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C444E029006905000BE3B2 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4210BF352912EEED003ED54B /* song.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song.mp3; path = Assets.xcassets/song.mp3; sourceTree = "<group>"; };
 		42C444D929006903000BE3B2 /* TM-SwiftTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TM-SwiftTool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolApp.swift; sourceTree = "<group>"; };
 		42C444DE29006903000BE3B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		42C444DB29006903000BE3B2 /* TM-SwiftTool */ = {
 			isa = PBXGroup;
 			children = (
+				4210BF352912EEED003ED54B /* song.mp3 */,
 				42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */,
 				42C444DE29006903000BE3B2 /* ContentView.swift */,
 				42C444E029006905000BE3B2 /* Assets.xcassets */,
@@ -243,6 +246,7 @@
 			files = (
 				42C444E429006905000BE3B2 /* Preview Assets.xcassets in Resources */,
 				42C444E129006905000BE3B2 /* Assets.xcassets in Resources */,
+				4210BF362912EEED003ED54B /* song.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
