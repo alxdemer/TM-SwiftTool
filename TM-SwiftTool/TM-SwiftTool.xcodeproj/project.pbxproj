@@ -16,6 +16,7 @@
 		42C444EF29006905000BE3B2 /* TM_SwiftToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444EE29006905000BE3B2 /* TM_SwiftToolTests.swift */; };
 		42C444F929006905000BE3B2 /* TM_SwiftToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */; };
 		42C444FB29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */; };
+		42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E9C3192977076200A4CBD9 /* Shell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		42C444F429006905000BE3B2 /* TM-SwiftToolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TM-SwiftToolUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITests.swift; sourceTree = "<group>"; };
 		42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		42E9C3192977076200A4CBD9 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				42C444E029006905000BE3B2 /* Assets.xcassets */,
 				42C444E529006905000BE3B2 /* TM_SwiftTool.entitlements */,
 				42C444E229006905000BE3B2 /* Preview Content */,
+				42E9C3192977076200A4CBD9 /* Shell.swift */,
 			);
 			path = "TM-SwiftTool";
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			files = (
 				42C444DF29006903000BE3B2 /* ContentView.swift in Sources */,
 				42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */,
+				42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

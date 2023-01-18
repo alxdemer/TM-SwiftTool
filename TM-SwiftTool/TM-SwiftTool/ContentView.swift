@@ -19,6 +19,12 @@ struct ContentView: View {
     let systemArchitecture = DeviceGuru().hardwareString()
     @State var audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "song", ofType: "mp3")!))
     @State var testAudioImage = "play.circle.fill"
+    @State private var userPassword = ""
+    @State var showSheet = false
+    @State var seniorReviewProgress = 0.0
+    @State var seniorReviewResult = ""
+    
+    
     
     var body: some View {
         VStack {
@@ -73,7 +79,7 @@ struct ContentView: View {
             {
                 Button()
                 {
-                    
+                    showSheet = true
                 }
                 label:
                 {
@@ -105,11 +111,39 @@ struct ContentView: View {
                 }
             }
             
+            Text(seniorReviewResult)
+            
         }
         .padding()
+        .sheet(isPresented: $showSheet, content:{
+            
+            VStack
+            {
+                Text("Authentication")
+                    .font(.largeTitle)
+                    .padding()
+                
+                Text("Please enter your account password for sudo priviledges.")
+                SecureField("Password", text: $userPassword).keyboardShortcut(.return).onSubmit {
+                    
+                    showSheet = false
+                    start()
+                }
+                Button(action: {
+                    
+                    showSheet = false
+                    start()
+                    
+                }, label: {Text("Start")})
+            }
+            .padding()
+            
+        })
+        
     }
     
-    public func getMacModel() -> String? {
+    public func getMacModel() -> String?
+    {
         let service = IOServiceGetMatchingService(kIOMainPortDefault,
                                                   IOServiceMatching("IOPlatformExpertDevice"))
         var modelIdentifier: String?
@@ -180,30 +214,26 @@ struct ContentView: View {
         return processor
     }
     
-
-    func shell(_ command: String) -> String {
-        let task = Process()
-        let pipe = Pipe()
-        
-        task.standardOutput = pipe
-        task.standardError = pipe
-        task.arguments = ["-c", command]
-        task.launchPath = "/bin/zsh"
-        task.standardInput = nil
-        task.launch()
-        
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
-        let output = String(data: data, encoding: .utf8)!
+    func start()
+    {
         
         
-        return output
+        let munkiUpdatesResponse = sudoShell("sudo /usr/local/munki/managedsoftwareupdate --checkonly", password: userPassword)
+        
+        seniorReviewProgress = 50.0
+        
+        
+        if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
+        {
+            seniorReviewResult = seniorReviewResult + "!Munki has pending updates!"
+        }
+        else
+        {
+            seniorReviewResult = seniorReviewResult + "Munki is all up to date."
+        }
+        
+        seniorReviewProgress = 100.0
+        
     }
-    
 
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
 }
