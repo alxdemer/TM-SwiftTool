@@ -21,6 +21,8 @@ struct ContentView: View {
     @State var testAudioImage = "play.circle.fill"
     @State private var userPassword = ""
     @State var showSheet = false
+    @State var seniorReviewStarted = false
+    @State var showLoadingIndicator = false
     @State var seniorReviewProgress = 0.0
     @State var seniorReviewResult = ""
     
@@ -111,7 +113,21 @@ struct ContentView: View {
                 }
             }
             
-            Text(seniorReviewResult)
+            HStack
+            {
+                if seniorReviewStarted == true
+                {
+                    ProgressView("Progress", value: seniorReviewProgress, total: 100.0).padding([.leading, .trailing], 50)
+                }
+                
+                if showLoadingIndicator == true
+                {
+                    ProgressView().progressViewStyle(.circular)
+                }
+            }
+            
+            
+            Text(seniorReviewResult).padding()
             
         }
         .padding()
@@ -127,12 +143,24 @@ struct ContentView: View {
                 SecureField("Password", text: $userPassword).keyboardShortcut(.return).onSubmit {
                     
                     showSheet = false
-                    start()
+                    seniorReviewStarted = true
+                    showLoadingIndicator = true
+                    
+                    DispatchQueue.global(qos: .userInitiated).async
+                    {
+                        start()
+                    }
                 }
                 Button(action: {
                     
                     showSheet = false
-                    start()
+                    seniorReviewStarted = true
+                    showLoadingIndicator = true
+                    
+                    DispatchQueue.global(qos: .userInitiated).async
+                    {
+                        start()
+                    }
                     
                 }, label: {Text("Start")})
             }
@@ -218,10 +246,11 @@ struct ContentView: View {
     {
         
         
-        let munkiUpdatesResponse = sudoShell("sudo /usr/local/munki/managedsoftwareupdate --checkonly", password: userPassword)
+        let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: userPassword)
         
-        seniorReviewProgress = 50.0
-        
+        DispatchQueue.main.async {
+            seniorReviewProgress = 10.0
+        }
         
         if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
         {
@@ -232,7 +261,102 @@ struct ContentView: View {
             seniorReviewResult = seniorReviewResult + "Munki is all up to date."
         }
         
-        seniorReviewProgress = 100.0
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 25.0
+        }
+        
+        let munkiManagedInstallReport = shell("defaults read /Library/'Managed Installs'/ManagedInstallReport.plist")
+        
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 30.0
+        }
+        
+        //get substring related to installed items
+        let start = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "InstalledItems")!.lowerBound)
+        let end = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "ItemsToInstall")!.lowerBound)
+        let range = start..<end
+        let munkiInstalledItems = munkiManagedInstallReport[range]
+        
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 45.0
+        }
+        
+        if munkiInstalledItems.contains("JumpClient")
+        {
+            seniorReviewResult = seniorReviewResult + "Remote Support Jump Client is installed.\n"
+        }
+        else
+        {
+            seniorReviewResult = seniorReviewResult + "!Remote Support Jump Client is NOT installed!"
+        }
+        
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 55.0
+        }
+        
+        if munkiInstalledItems.contains("Sentinel One") && munkiInstalledItems.contains("sentinelone_registration_token")
+        {
+            seniorReviewResult = seniorReviewResult + "Sentinel One is installed."
+        }
+        else
+        {
+            seniorReviewResult = seniorReviewResult + "!Sentinel One is NOT installed!"
+        }
+        
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 65.0
+        }
+        
+        if munkiInstalledItems.contains("Rapid7Agent")
+        {
+            seniorReviewResult = seniorReviewResult + "Rapid7 Agent is installed."
+        }
+        else
+        {
+            seniorReviewResult = seniorReviewResult + "!Rapid7 Agent is NOT installed!"
+        }
+        
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 75.0
+        }
+        
+        
+        if munkiInstalledItems.contains("Rapid7Agent")
+        {
+            seniorReviewResult = seniorReviewResult + "Rapid7 Agent is installed."
+        }
+        else
+        {
+            seniorReviewResult = seniorReviewResult + "!Rapid7 Agent is NOT installed!"
+        }
+        
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 85.0
+        }
+        
+        if munkiInstalledItems.contains("Office 2021 VL")
+        {
+            seniorReviewResult = seniorReviewResult + "Office 2021 is installed."
+        }
+        else
+        {
+            seniorReviewResult = seniorReviewResult + "!Office 2021 is NOT installed!"
+        }
+        
+        DispatchQueue.main.async
+        {
+            seniorReviewProgress = 100.0
+            
+            seniorReviewStarted = false
+            showLoadingIndicator = false
+        }
         
     }
 

@@ -26,7 +26,7 @@ func shell(_ command: String) -> String {
     return output
 }
 
-func sudoShell(_ command: String, password: String) -> String {
+func sudoShell(command: String, argument: String, password: String) -> String {
     
     let taskOne = Process()
         taskOne.launchPath = "/bin/echo"
@@ -34,7 +34,7 @@ func sudoShell(_ command: String, password: String) -> String {
 
         let taskTwo = Process()
         taskTwo.launchPath = "/usr/bin/sudo"
-        taskTwo.arguments = ["-S", "/usr/local/munki/managedsoftwareupdate", "--checkonly"]
+        taskTwo.arguments = ["-S", command, argument]
 
         let pipeBetween:Pipe = Pipe()
         taskOne.standardOutput = pipeBetween
