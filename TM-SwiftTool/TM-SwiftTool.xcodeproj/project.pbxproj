@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */ = {isa = PBXBuildFile; productRef = 4210B2BA29071224000A7F0E /* DeviceGuru */; };
 		4210BF362912EEED003ED54B /* song.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4210BF352912EEED003ED54B /* song.mp3 */; };
+		42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */; };
 		42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */; };
-		42C444DF29006903000BE3B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* ContentView.swift */; };
+		42C444DF29006903000BE3B2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* MainView.swift */; };
 		42C444E129006905000BE3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C444E029006905000BE3B2 /* Assets.xcassets */; };
 		42C444E429006905000BE3B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C444E329006905000BE3B2 /* Preview Assets.xcassets */; };
 		42C444EF29006905000BE3B2 /* TM_SwiftToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444EE29006905000BE3B2 /* TM_SwiftToolTests.swift */; };
@@ -38,9 +39,10 @@
 
 /* Begin PBXFileReference section */
 		4210BF352912EEED003ED54B /* song.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song.mp3; path = Assets.xcassets/song.mp3; sourceTree = "<group>"; };
+		42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacModelFinder.swift; sourceTree = "<group>"; };
 		42C444D929006903000BE3B2 /* TM-SwiftTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TM-SwiftTool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolApp.swift; sourceTree = "<group>"; };
-		42C444DE29006903000BE3B2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		42C444DE29006903000BE3B2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		42C444E029006905000BE3B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42C444E329006905000BE3B2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		42C444E529006905000BE3B2 /* TM_SwiftTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TM_SwiftTool.entitlements; sourceTree = "<group>"; };
@@ -103,11 +105,12 @@
 			children = (
 				4210BF352912EEED003ED54B /* song.mp3 */,
 				42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */,
-				42C444DE29006903000BE3B2 /* ContentView.swift */,
+				42C444DE29006903000BE3B2 /* MainView.swift */,
 				42C444E029006905000BE3B2 /* Assets.xcassets */,
 				42C444E529006905000BE3B2 /* TM_SwiftTool.entitlements */,
 				42C444E229006905000BE3B2 /* Preview Content */,
 				42E9C3192977076200A4CBD9 /* Shell.swift */,
+				42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */,
 			);
 			path = "TM-SwiftTool";
 			sourceTree = "<group>";
@@ -274,7 +277,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42C444DF29006903000BE3B2 /* ContentView.swift in Sources */,
+				42C444DF29006903000BE3B2 /* MainView.swift in Sources */,
+				42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */,
 				42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */,
 				42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */,
 			);
