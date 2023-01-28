@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */ = {isa = PBXBuildFile; productRef = 4210B2BA29071224000A7F0E /* DeviceGuru */; };
-		4210BF362912EEED003ED54B /* song.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4210BF352912EEED003ED54B /* song.mp3 */; };
+		4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214361B2984944D00EA1839 /* SeniorReview.swift */; };
+		421436222984AF4400EA1839 /* Songs in Resources */ = {isa = PBXBuildFile; fileRef = 421436212984AF4400EA1839 /* Songs */; };
 		42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */; };
 		42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */; };
 		42C444DF29006903000BE3B2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* MainView.swift */; };
@@ -38,7 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4210BF352912EEED003ED54B /* song.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song.mp3; path = Assets.xcassets/song.mp3; sourceTree = "<group>"; };
+		4214361B2984944D00EA1839 /* SeniorReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReview.swift; sourceTree = "<group>"; };
+		421436212984AF4400EA1839 /* Songs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Songs; path = Assets.xcassets/Songs; sourceTree = "<group>"; };
 		42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacModelFinder.swift; sourceTree = "<group>"; };
 		42C444D929006903000BE3B2 /* TM-SwiftTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TM-SwiftTool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolApp.swift; sourceTree = "<group>"; };
@@ -103,7 +105,7 @@
 		42C444DB29006903000BE3B2 /* TM-SwiftTool */ = {
 			isa = PBXGroup;
 			children = (
-				4210BF352912EEED003ED54B /* song.mp3 */,
+				421436212984AF4400EA1839 /* Songs */,
 				42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */,
 				42C444DE29006903000BE3B2 /* MainView.swift */,
 				42C444E029006905000BE3B2 /* Assets.xcassets */,
@@ -111,6 +113,7 @@
 				42C444E229006905000BE3B2 /* Preview Content */,
 				42E9C3192977076200A4CBD9 /* Shell.swift */,
 				42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */,
+				4214361B2984944D00EA1839 /* SeniorReview.swift */,
 			);
 			path = "TM-SwiftTool";
 			sourceTree = "<group>";
@@ -250,9 +253,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				421436222984AF4400EA1839 /* Songs in Resources */,
 				42C444E429006905000BE3B2 /* Preview Assets.xcassets in Resources */,
 				42C444E129006905000BE3B2 /* Assets.xcassets in Resources */,
-				4210BF362912EEED003ED54B /* song.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +282,7 @@
 			files = (
 				42C444DF29006903000BE3B2 /* MainView.swift in Sources */,
 				42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */,
+				4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */,
 				42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */,
 				42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */,
 			);

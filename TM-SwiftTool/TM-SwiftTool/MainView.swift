@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import AVKit
+import AVFoundation
 import DeviceGuru
 
 struct MainView: View {
@@ -19,20 +19,16 @@ struct MainView: View {
     let systemArchitecture = DeviceGuru().hardwareString()
     let macModelFinder = MacModelFinder()
     
-    @State var audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "song", ofType: "mp3")!))
+    var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
     @State var testAudioImage = "play.circle.fill"
-    @State private var userPassword = ""
+    @State private var adminPassword = ""
     @State var showSheet = false
     
-    @State var seniorReviewStarted = false
-    @State var showLoadingIndicator = false
-    @State var seniorReviewProgress = 0.0
+    @State var seniorReview = SeniorReview()
+    @State var isPerformingSeniorReview = false
+    @State var disableSeniorReviewButton = false
     
-    @State var seniorReviewMunkiUpdates = ""
-    @State var seniorReviewJumpClient = ""
-    @State var seniorReviewSentinel = ""
-    @State var seniorReviewRapid7 = ""
-    @State var seniorReviewOffice21 = ""
+    @State var results: [String:String] = [:]
     
     
     
@@ -174,20 +170,23 @@ struct MainView: View {
                     Text("Senior Review")
                     
                 }
+                .disabled(disableSeniorReviewButton)
                 
                 Button()
                 {
-                    if (!self.audioPlayer.isPlaying)
+                    
+                    if (!audioPlayer.isPlaying)
                     {
                         testAudioImage = "stop.circle.fill"
-                        self.audioPlayer.play()
+                        audioPlayer.play()
                         shell("osascript -e \"set Volume 3\"")
                     }
                     else
                     {
                         testAudioImage = "play.circle.fill"
-                        self.audioPlayer.stop()
+                        audioPlayer.stop()
                     }
+                     
                 }
                 label:
                 {
@@ -200,16 +199,12 @@ struct MainView: View {
             
             HStack
             {
-                if seniorReviewStarted == true
+                if isPerformingSeniorReview == true
                 {
-                    ProgressView("Progress", value: seniorReviewProgress, total: 100.0).padding(.leading, 30)
-                }
-                
-                if showLoadingIndicator == true
-                {
+                    Text("Performing Senior Review")
+                    
                     ProgressView().progressViewStyle(.circular)
                         .scaleEffect(0.5)
-                        .padding()
                 }
             }
             .padding()
@@ -219,16 +214,16 @@ struct MainView: View {
             {
                 VStack
                 {
-                    Text(seniorReviewMunkiUpdates)
-                    Text(seniorReviewJumpClient)
-                    Text(seniorReviewSentinel)
-                    Text(seniorReviewRapid7)
+                    Text(results["munkiUpdates"] ?? "")
+                    Text(results["jumpClient"] ?? "")
+                    Text(results["sentinelOne"] ?? "")
+                    Text(results["rapid7"] ?? "")
                 }
                 .padding()
                 
                 VStack
                 {
-                    Text(seniorReviewOffice21)
+                    Text(results["office2021"] ?? "")
                 }
                 .padding()
             }
@@ -251,16 +246,24 @@ struct MainView: View {
                 Text("Please enter your admin password:")
                     .padding([.leading, .trailing])
                 
-                SecureField("Password", text: $userPassword).keyboardShortcut(.return).onSubmit {
+                SecureField("Password", text: $adminPassword).keyboardShortcut(.return).onSubmit {
                     
                     showSheet = false
-                    seniorReviewStarted = true
-                    showLoadingIndicator = true
+                    isPerformingSeniorReview = true
+                    disableSeniorReviewButton = true
                     
                     DispatchQueue.global(qos: .userInitiated).async
                     {
-                        start()
+                        results = seniorReview.start(adminPassword: adminPassword)
+                        
+                        DispatchQueue.main.async
+                        {
+                            adminPassword = ""
+                            isPerformingSeniorReview = false
+                            disableSeniorReviewButton = false
+                        }
                     }
+                    
                 }
                 .padding([.leading, .top, .trailing])
                 
@@ -269,22 +272,29 @@ struct MainView: View {
                     Button(action: {
                         
                         showSheet = false
-                        seniorReviewStarted = true
-                        showLoadingIndicator = true
+                        isPerformingSeniorReview = true
+                        disableSeniorReviewButton = true
                         
                         DispatchQueue.global(qos: .userInitiated).async
                         {
-                            start()
-                            userPassword = ""
+                            results = seniorReview.start(adminPassword: adminPassword)
+                            
+                            DispatchQueue.main.async
+                            {
+                                adminPassword = ""
+                                isPerformingSeniorReview = false
+                                disableSeniorReviewButton = false
+                            }
                         }
                         
                     }, label: {Text("Start")})
+                    .buttonStyle(.borderedProminent)
                     .padding()
                     
                     Button(action: {
                         
                         showSheet = false
-                        userPassword = ""
+                        adminPassword = ""
                         
                     }, label: {Text("Cancel")})
                     .padding()
@@ -345,113 +355,6 @@ struct MainView: View {
         let SSDHDDSize = commandShellResponse[range]
         
         return SSDHDDModel+SSDHDDSize
-    }
-    
-    func start()
-    {
-        seniorReviewMunkiUpdates = ""
-        seniorReviewJumpClient = ""
-        seniorReviewSentinel = ""
-        seniorReviewRapid7 = ""
-        seniorReviewOffice21 = ""
-        
-        let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: userPassword)
-        
-        DispatchQueue.main.async {
-            seniorReviewProgress = 10.0
-        }
-        
-        if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
-        {
-            seniorReviewMunkiUpdates = "FAILURE - Munki has pending updates"
-        }
-        else
-        {
-            seniorReviewMunkiUpdates = "SUCCESS - Munki is all up to date."
-        }
-        
-        DispatchQueue.main.async
-        {
-            seniorReviewProgress = 25.0
-        }
-        
-        let munkiManagedInstallReport = shell("defaults read /Library/'Managed Installs'/ManagedInstallReport.plist")
-        
-        DispatchQueue.main.async
-        {
-            seniorReviewProgress = 30.0
-        }
-        
-        //get substring related to installed items
-        let start = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "InstalledItems")!.lowerBound)
-        let end = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "ItemsToInstall")!.lowerBound)
-        let range = start..<end
-        let munkiInstalledItems = munkiManagedInstallReport[range]
-        
-        DispatchQueue.main.async
-        {
-            seniorReviewProgress = 45.0
-        }
-        
-        if munkiInstalledItems.contains("JumpClient")
-        {
-            seniorReviewJumpClient = "SUCCESS - Remote Support Jump Client is installed.\n"
-        }
-        else
-        {
-            seniorReviewJumpClient = "FAILURE - Remote Support Jump Client is NOT installed."
-        }
-        
-        DispatchQueue.main.async
-        {
-            seniorReviewProgress = 55.0
-        }
-        
-        if munkiInstalledItems.contains("SentinelOne") && munkiInstalledItems.contains("sentinelone_registration_token")
-        {
-            seniorReviewSentinel = "SUCCESS - Sentinel One is installed."
-        }
-        else
-        {
-            seniorReviewSentinel = "FAILURE - Sentinel One is NOT installed."
-        }
-        
-        DispatchQueue.main.async
-        {
-            seniorReviewProgress = 65.0
-        }
-        
-        if munkiInstalledItems.contains("Rapid7Agent")
-        {
-            seniorReviewRapid7 = "SUCCESS - Rapid7 Agent is installed."
-        }
-        else
-        {
-            seniorReviewRapid7 = "FAILURE - Rapid7 Agent is NOT installed."
-        }
-        
-        DispatchQueue.main.async
-        {
-            seniorReviewProgress = 85.0
-        }
-        
-        if munkiInstalledItems.contains("Office 2021 VL")
-        {
-            seniorReviewOffice21 = "SUCCESS - Office 2021 is installed."
-        }
-        else
-        {
-            seniorReviewOffice21 = "FAILURE - Office 2021 is NOT installed."
-        }
-        
-        DispatchQueue.main.async
-        {
-            seniorReviewProgress = 100.0
-            
-            seniorReviewStarted = false
-            showLoadingIndicator = false
-        }
-        
     }
 
 }
