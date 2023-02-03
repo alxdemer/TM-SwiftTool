@@ -228,6 +228,9 @@ struct MainView: View {
                 .padding()
             }
             
+            Text("© 2023 RIT ITS DS")
+            Text("Pre-Alpha Build")
+            
         }
         .padding()
         .sheet(isPresented: $showSheet, content:{
