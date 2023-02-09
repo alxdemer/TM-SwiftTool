@@ -19,10 +19,11 @@ struct MainView: View {
     let systemArchitecture = DeviceGuru().hardwareString()
     let macModelFinder = MacModelFinder()
     
-    var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
-    @State var testAudioImage = "play.circle.fill"
+    @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
+    @State var isPlaying = false
     @State private var adminPassword = ""
     @State var showSheet = false
+    
     
     @State var seniorReview = SeniorReview()
     @State var isPerformingSeniorReview = false
@@ -177,13 +178,13 @@ struct MainView: View {
                     
                     if (!audioPlayer.isPlaying)
                     {
-                        testAudioImage = "stop.circle.fill"
+                        isPlaying = true
                         audioPlayer.play()
                         shell("osascript -e \"set Volume 3\"")
                     }
                     else
                     {
-                        testAudioImage = "play.circle.fill"
+                        isPlaying = false
                         audioPlayer.stop()
                     }
                      
@@ -191,7 +192,8 @@ struct MainView: View {
                 label:
                 {
                     
-                    Image(systemName: testAudioImage)
+                    Image(systemName: isPlaying ? "stop.circle.fill":"play.circle.fill")
+                    
                     Text("Test Audio")
                     
                 }
@@ -228,8 +230,8 @@ struct MainView: View {
                 .padding()
             }
             
-            Text("© 2023 RIT ITS DS")
-            Text("Pre-Alpha Build")
+            Text("© 2023 RIT ITS")
+            Text("Beta 1")
             
         }
         .padding()
@@ -257,10 +259,12 @@ struct MainView: View {
                     
                     DispatchQueue.global(qos: .userInitiated).async
                     {
-                        results = seniorReview.start(adminPassword: adminPassword)
+                        results = seniorReview.start(AdminPassword: adminPassword)
                         
                         DispatchQueue.main.async
                         {
+                            isPlaying = true
+                            audioPlayer.play()
                             adminPassword = ""
                             isPerformingSeniorReview = false
                             disableSeniorReviewButton = false
@@ -280,10 +284,12 @@ struct MainView: View {
                         
                         DispatchQueue.global(qos: .userInitiated).async
                         {
-                            results = seniorReview.start(adminPassword: adminPassword)
+                            results = seniorReview.start(AdminPassword: adminPassword)
                             
                             DispatchQueue.main.async
                             {
+                                isPlaying = true
+                                audioPlayer.play()
                                 adminPassword = ""
                                 isPerformingSeniorReview = false
                                 disableSeniorReviewButton = false
@@ -360,4 +366,6 @@ struct MainView: View {
         return SSDHDDModel+SSDHDDSize
     }
 
+    
 }
+

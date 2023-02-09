@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import AVFAudio
 
-class SeniorReview
+struct SeniorReview
 {
-    func start(adminPassword: String) -> [String: String]
+    
+    func start(AdminPassword: String) -> [String: String]
     {
         
         var results: [String: String] = [:]
         
-        let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: adminPassword)
+        let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: AdminPassword)
         
         
         if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
@@ -73,10 +75,9 @@ class SeniorReview
             results["office2021"] = "FAILURE - Office 2021 is NOT installed."
         }
         
+        //verify that the camera works
         shell("open facetime://")
-        
         sleep(8)
-        
         shell("killall FaceTime")
         
         return results
