@@ -22,8 +22,10 @@ struct MainView: View {
     @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
     @State var isPlaying = false
     @State private var adminPassword = ""
-    @State var showSheet = false
-    
+    @State var newUserName = ""
+    @State var addUserResult = ""
+    @State var showAdminSheet = false
+    @State var goingToPerformSeniorReview = false
     
     @State var seniorReview = SeniorReview()
     @State var isPerformingSeniorReview = false
@@ -163,7 +165,22 @@ struct MainView: View {
             {
                 Button()
                 {
-                    showSheet = true
+                    showAdminSheet = true
+                    addUserResult = ""
+                    results = [:]
+                }
+                label:
+                {
+                    Image(systemName: "person.crop.circle.badge.plus")
+                    Text("Add User")
+                }
+                
+                Button()
+                {
+                    goingToPerformSeniorReview = true
+                    showAdminSheet = true
+                    addUserResult = ""
+                    results = [:]
                 }
                 label:
                 {
@@ -230,55 +247,38 @@ struct MainView: View {
                 .padding()
             }
             
+            
+            Text(addUserResult)
+                .padding()
+            
             Text("© 2023 RIT ITS")
-            Text("Beta 1")
+            Text("Beta 2")
             
         }
         .padding()
-        .sheet(isPresented: $showSheet, content:{
+        .sheet(isPresented: $showAdminSheet, content:{
             
             VStack
             {
-                HStack
+                if goingToPerformSeniorReview == true
                 {
-                    Image(systemName: "key.fill")
-                        .resizable()
-                        .frame(width: 10, height: 20)
-                    Text("Authentication")
-                        .font(.largeTitle)
-                }
-                
-                Text("Please enter your admin password:")
-                    .padding([.leading, .trailing])
-                
-                SecureField("Password", text: $adminPassword).keyboardShortcut(.return).onSubmit {
                     
-                    showSheet = false
-                    isPerformingSeniorReview = true
-                    disableSeniorReviewButton = true
-                    
-                    DispatchQueue.global(qos: .userInitiated).async
+                    HStack
                     {
-                        results = seniorReview.start(AdminPassword: adminPassword)
-                        
-                        DispatchQueue.main.async
-                        {
-                            isPlaying = true
-                            audioPlayer.play()
-                            adminPassword = ""
-                            isPerformingSeniorReview = false
-                            disableSeniorReviewButton = false
-                        }
+                        Image(systemName: "key.fill")
+                            .resizable()
+                            .frame(width: 10, height: 20)
+                        Text("Authentication")
+                            .font(.largeTitle)
                     }
                     
-                }
-                .padding([.leading, .top, .trailing])
-                
-                HStack
-                {
-                    Button(action: {
+                    
+                    Text("Please enter your admin password:")
+                        .padding([.leading, .trailing])
+                    
+                    SecureField("Password", text: $adminPassword).keyboardShortcut(.return).onSubmit {
                         
-                        showSheet = false
+                        showAdminSheet = false
                         isPerformingSeniorReview = true
                         disableSeniorReviewButton = true
                         
@@ -291,30 +291,131 @@ struct MainView: View {
                                 isPlaying = true
                                 audioPlayer.play()
                                 adminPassword = ""
+                                goingToPerformSeniorReview = false
                                 isPerformingSeniorReview = false
                                 disableSeniorReviewButton = false
                             }
                         }
                         
-                    }, label: {Text("Start")})
-                    .buttonStyle(.borderedProminent)
-                    .padding()
+                    }
+                    .padding([.leading, .top, .trailing])
                     
-                    Button(action: {
+                    HStack
+                    {
+                        Button(action: {
+                            
+                            showAdminSheet = false
+                            isPerformingSeniorReview = true
+                            disableSeniorReviewButton = true
+                            
+                            DispatchQueue.global(qos: .userInitiated).async
+                            {
+                                results = seniorReview.start(AdminPassword: adminPassword)
+                                
+                                DispatchQueue.main.async
+                                {
+                                    isPlaying = true
+                                    audioPlayer.play()
+                                    adminPassword = ""
+                                    goingToPerformSeniorReview = false
+                                    isPerformingSeniorReview = false
+                                    disableSeniorReviewButton = false
+                                }
+                            }
+                            
+                        }, label: {Text("Start")})
+                        .buttonStyle(.borderedProminent)
+                        .padding()
                         
-                        showSheet = false
-                        adminPassword = ""
+                        Button(action: {
+                            
+                            goingToPerformSeniorReview = false
+                            showAdminSheet = false
+                            adminPassword = ""
+                            newUserName = ""
+                            
+                        }, label: {Text("Cancel")})
+                        .padding()
                         
-                    }, label: {Text("Cancel")})
-                    .padding()
+                        
+                    }
+                }
+                else
+                {
+                    HStack
+                    {
+                        Image(systemName: "person.crop.circle.badge.plus")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text("Add User")
+                            .font(.largeTitle)
+                    }
+                    
+                    
+                    Text("Please enter the username for the new user and your admin password:")
+                        .padding([.leading, .trailing])
+                    
+                    TextField("New Username", text: $newUserName)
+                        .padding([.leading, .trailing])
+                    
+                    SecureField("Your Admin Password", text: $adminPassword)
+                        .padding([.leading, .trailing])
+                    
+                    HStack
+                    {
+                        Button(action: {
+        
+                            
+                            DispatchQueue.global(qos: .userInitiated).async
+                            {
+                                
+                                //run the shell script to add the new user
+                                sudoShellCreateNewUser(command: "/System/Library/CoreServices/ManagedClient.app/Contents/Resources/createmobileaccount", password: adminPassword, newUserName: newUserName)
+                                
+                                //check if the new user was added
+                                let userAdded = shell("dscl . -list /Users").contains(userName)
+                                
+                                //let the user know if the new user was added
+                                DispatchQueue.main.async {
+                                    if userAdded
+                                    {
+                                        addUserResult = "Successfully added user!"
+                                        adminPassword = ""
+                                        showAdminSheet = false
+                                    }
+                                    else
+                                    {
+                                        addUserResult = "Failed to add user!"
+                                        adminPassword = ""
+                                        showAdminSheet = false
+                                    }
+                                }
+                            }
+                            
+                        }, label: {Text("Add")})
+                        .buttonStyle(.borderedProminent)
+                        .padding()
+                        
+                        Button(action: {
+                            
+                            showAdminSheet = false
+                            adminPassword = ""
+                            
+                        }, label: {Text("Cancel")})
+                        .padding()
+                        
+                        
+                    }
                     
                     
                 }
+                
                 
             }
             .padding()
             
         })
+        
         
     }
     

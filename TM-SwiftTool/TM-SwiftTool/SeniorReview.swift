@@ -18,8 +18,11 @@ struct SeniorReview
         
         let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: AdminPassword)
         
-        
-        if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
+        if munkiUpdatesResponse == "sudo /usr/local/munki/managedsoftwareupdate: command not found"
+        {
+            results["munkiUpdates"] = "FAILURE - Could not talk to managed software center. It may not be installed properly or is malfunctioning."
+        }
+        else if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
         {
             results["munkiUpdates"] = "FAILURE - Munki has pending updates"
         }
@@ -36,44 +39,57 @@ struct SeniorReview
         let range = start..<end
         let munkiInstalledItems = munkiManagedInstallReport[range]
         
-        if munkiInstalledItems.contains("JumpClient")
+        if munkiInstalledItems == "dquote>"
         {
-            results["jumpClient"] = "SUCCESS - Remote Support Jump Client is installed.\n"
+            results["jumpClient"] = "FAILURE - Managed software center installed apps list could not be found. Munki may not be installed properly or is malfunctioning.\n"
+            results["sentinelOne"] = ""
+            results["rapid7"] = ""
+            results["office2021"] = ""
         }
         else
         {
-            results["jumpClient"] = "FAILURE - Remote Support Jump Client is NOT installed."
+            
+            if munkiInstalledItems.contains("JumpClient")
+            {
+                results["jumpClient"] = "SUCCESS - Remote Support Jump Client is installed.\n"
+            }
+            else
+            {
+                results["jumpClient"] = "FAILURE - Remote Support Jump Client is NOT installed."
+            }
+            
+            
+            if munkiInstalledItems.contains("SentinelOne") && munkiInstalledItems.contains("sentinelone_registration_token")
+            {
+                results["sentinelOne"] = "SUCCESS - Sentinel One is installed."
+            }
+            else
+            {
+                results["sentinelOne"] = "FAILURE - Sentinel One is NOT installed."
+            }
+            
+            
+            if munkiInstalledItems.contains("Rapid7Agent")
+            {
+                results["rapid7"] = "SUCCESS - Rapid7 Agent is installed."
+            }
+            else
+            {
+                results["rapid7"] = "FAILURE - Rapid7 Agent is NOT installed."
+            }
+            
+            
+            if munkiInstalledItems.contains("Office 2021 VL")
+            {
+                results["office2021"] = "SUCCESS - Office 2021 is installed."
+            }
+            else
+            {
+                results["office2021"] = "FAILURE - Office 2021 is NOT installed."
+            }
+            
         }
         
-        
-        if munkiInstalledItems.contains("SentinelOne") && munkiInstalledItems.contains("sentinelone_registration_token")
-        {
-            results["sentinelOne"] = "SUCCESS - Sentinel One is installed."
-        }
-        else
-        {
-            results["sentinelOne"] = "FAILURE - Sentinel One is NOT installed."
-        }
-        
-        
-        if munkiInstalledItems.contains("Rapid7Agent")
-        {
-            results["rapid7"] = "SUCCESS - Rapid7 Agent is installed."
-        }
-        else
-        {
-            results["rapid7"] = "FAILURE - Rapid7 Agent is NOT installed."
-        }
-        
-        
-        if munkiInstalledItems.contains("Office 2021 VL")
-        {
-            results["office2021"] = "SUCCESS - Office 2021 is installed."
-        }
-        else
-        {
-            results["office2021"] = "FAILURE - Office 2021 is NOT installed."
-        }
         
         //verify that the camera works
         shell("open facetime://")
