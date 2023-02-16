@@ -8,14 +8,14 @@
 import Foundation
 import DeviceGuru
 
-class ComputerInfo: ObservableObject
+class ComputerInfo
 {
-    @Published var systemHostName = ProcessInfo.processInfo.hostName
-    @Published var userName = NSUserName()
-    @Published var systemVersion = ProcessInfo.processInfo.operatingSystemVersionString
-    @Published var hardware = ProcessInfo.processInfo.description
-    @Published var systemArchitecture = DeviceGuru().hardwareString()
-    @Published var macModelFinder = MacModelFinder()
+    var systemHostName = ProcessInfo.processInfo.hostName
+    var userName = NSUserName()
+    var systemVersion = ProcessInfo.processInfo.operatingSystemVersionString
+    var hardware = ProcessInfo.processInfo.description
+    var systemArchitecture = DeviceGuru().hardwareString()
+    var macModelFinder = MacModelFinder()
     
     public func getMacSerial() -> String.SubSequence
     {

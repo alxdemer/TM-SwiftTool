@@ -21,7 +21,7 @@ struct AddUserView: View
             {
                 Image(systemName: "person.crop.circle.badge.plus")
                     .resizable()
-                    .frame(width: 35, height: 30)
+                    .frame(width: 36, height: 30)
                 Text("Add User")
                     .font(.largeTitle)
             }

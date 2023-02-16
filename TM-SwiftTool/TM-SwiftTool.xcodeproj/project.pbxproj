@@ -51,7 +51,6 @@
 		42C444DE29006903000BE3B2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		42C444E029006905000BE3B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42C444E329006905000BE3B2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		42C444E529006905000BE3B2 /* TM_SwiftTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TM_SwiftTool.entitlements; sourceTree = "<group>"; };
 		42C444EA29006905000BE3B2 /* TM-SwiftToolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TM-SwiftToolTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444EE29006905000BE3B2 /* TM_SwiftToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolTests.swift; sourceTree = "<group>"; };
 		42C444F429006905000BE3B2 /* TM-SwiftToolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TM-SwiftToolUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +61,7 @@
 		42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReviewView.swift; sourceTree = "<group>"; };
 		42D247CF299E9EA400AF878F /* AddUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserView.swift; sourceTree = "<group>"; };
 		42E9C3192977076200A4CBD9 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
+		6D22D0C4299EBA9300E51959 /* TM_SwiftTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TM_SwiftTool.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,12 +113,11 @@
 		42C444DB29006903000BE3B2 /* TM-SwiftTool */ = {
 			isa = PBXGroup;
 			children = (
+				6D22D0C4299EBA9300E51959 /* TM_SwiftTool.entitlements */,
+				42C444E029006905000BE3B2 /* Assets.xcassets */,
 				421436212984AF4400EA1839 /* Songs */,
 				42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */,
 				42C444DE29006903000BE3B2 /* MainView.swift */,
-				42C444E029006905000BE3B2 /* Assets.xcassets */,
-				42C444E529006905000BE3B2 /* TM_SwiftTool.entitlements */,
-				42C444E229006905000BE3B2 /* Preview Content */,
 				42E9C3192977076200A4CBD9 /* Shell.swift */,
 				42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */,
 				4214361B2984944D00EA1839 /* SeniorReview.swift */,
@@ -126,6 +125,7 @@
 				42D247CB299E9B9B00AF878F /* ComputerInfo.swift */,
 				42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */,
 				42D247CF299E9EA400AF878F /* AddUserView.swift */,
+				42C444E229006905000BE3B2 /* Preview Content */,
 			);
 			path = "TM-SwiftTool";
 			sourceTree = "<group>";

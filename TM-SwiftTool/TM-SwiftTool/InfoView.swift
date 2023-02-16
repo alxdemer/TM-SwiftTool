@@ -10,7 +10,7 @@ import SwiftUI
 struct InfoView: View
 {
     
-    @EnvironmentObject private var computerInfo: ComputerInfo
+    private var computerInfo = ComputerInfo()
     
     var body: some View
     {

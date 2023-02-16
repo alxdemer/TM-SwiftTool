@@ -9,14 +9,12 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject private var computerInfo = ComputerInfo()
-    
     var body: some View
     {
         
         TabView
         {
-            InfoView().environmentObject(computerInfo)
+            InfoView()
                 .tabItem
                 {
                     Label("Information", systemImage: "info.circle")

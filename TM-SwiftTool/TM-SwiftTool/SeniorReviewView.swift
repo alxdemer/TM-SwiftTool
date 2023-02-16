@@ -11,7 +11,7 @@ import AVFoundation
 struct SeniorReviewView: View
 {
     
-    @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
+    @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat", "Old Time Rock N' Roll", "Ball For Me - Post Malone", "Hit Me With Your Best Shot"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
     @State var isPlaying = false
     @State private var adminPassword = ""
     @State var seniorReview = SeniorReview()
@@ -135,8 +135,8 @@ struct SeniorReviewView: View
                     Text(results["jumpClient"] ?? "")
                     Text(results["sentinelOne"] ?? "")
                     Text(results["rapid7"] ?? "")
-                    Text(results["alertusDesktopApp"] ?? "")
                     Text(results["office2021"] ?? "")
+                    Text(results["alertusDesktopApp"] ?? "")
                     
                 }
                 .padding()

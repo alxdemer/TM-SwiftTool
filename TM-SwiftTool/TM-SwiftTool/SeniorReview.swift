@@ -18,9 +18,9 @@ struct SeniorReview
         
         let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: AdminPassword)
         
-        if munkiUpdatesResponse == "sudo /usr/local/munki/managedsoftwareupdate: command not found"
+        if munkiUpdatesResponse.contains("sudo: /usr/local/munki/managedsoftwareupdate: command not found")
         {
-            results["munkiUpdates"] = "FAILURE - Could not talk to managed software center. It may not be installed properly or is malfunctioning."
+            results["munkiUpdates"] = "FAILURE - Could not talk to managed software center. It may not be installed or is malfunctioning."
         }
         else if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
         {
@@ -34,21 +34,21 @@ struct SeniorReview
         //get managed install report from munki
         let munkiManagedInstallReport = shell("defaults read /Library/'Managed Installs'/ManagedInstallReport.plist")
         
-        //get substring related to installed items
-        let start = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "InstalledItems")!.lowerBound)
-        let end = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "ItemsToInstall")!.lowerBound)
-        let range = start..<end
-        let munkiInstalledItems = munkiManagedInstallReport[range]
-        
-        if munkiInstalledItems == "dquote>"
+        //if munkiManagedInstallReport content comes back with does not exist, set all expected apps results to failure
+        if munkiManagedInstallReport.contains("does not exist")
         {
-            results["jumpClient"] = "FAILURE - Managed software center installed apps list could not be found."
-            results["sentinelOne"] = "FAILURE - Managed software center installed apps list could not be found."
-            results["rapid7"] = "FAILURE - Managed software center installed apps list could not be found."
-            results["office2021"] = "FAILURE - Managed software center installed apps list could not be found."
+            results["jumpClient"] = "FAILURE - Managed software center installed apps list could not be found. Munki may not be installed or is malfunctioning."
+            results["sentinelOne"] = "FAILURE - Managed software center installed apps list could not be found. Munki may not be installed or is malfunctioning."
+            results["rapid7"] = "FAILURE - Managed software center installed apps list could not be found. Munki may not be installed or is malfunctioning."
+            results["office2021"] = "FAILURE - Managed software center installed apps list could not be found. Munki may not be installed or is malfunctioning."
         }
         else
         {
+            //if munkiManagedInstallReport content is present, substring it to get the installed items
+            let start = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "InstalledItems")!.lowerBound)
+            let end = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "ItemsToInstall")!.lowerBound)
+            let range = start..<end
+            let munkiInstalledItems = munkiManagedInstallReport[range]
             
             if munkiInstalledItems.contains("JumpClient")
             {
