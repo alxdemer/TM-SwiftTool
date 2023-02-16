@@ -52,7 +52,7 @@ struct SeniorReviewView: View
                         isPlaying = true
                         audioPlayer.play()
                         adminPassword = ""
-                        isPerformingSeniorReview = true
+                        isPerformingSeniorReview = false
                         disableSeniorReviewButton = false
                     }
                 }
