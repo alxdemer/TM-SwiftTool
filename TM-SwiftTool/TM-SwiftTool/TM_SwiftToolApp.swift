@@ -12,7 +12,7 @@ struct TM_SwiftToolApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .frame(minWidth: 600, maxWidth: 800, minHeight: 400, maxHeight: .infinity)
+                .frame(minWidth: 700, maxWidth: .infinity, minHeight: 500, maxHeight: .infinity)
         }
         
     }

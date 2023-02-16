@@ -18,6 +18,10 @@
 		42C444EF29006905000BE3B2 /* TM_SwiftToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444EE29006905000BE3B2 /* TM_SwiftToolTests.swift */; };
 		42C444F929006905000BE3B2 /* TM_SwiftToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */; };
 		42C444FB29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */; };
+		42D247CA299E959700AF878F /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247C9299E959700AF878F /* InfoView.swift */; };
+		42D247CC299E9B9B00AF878F /* ComputerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CB299E9B9B00AF878F /* ComputerInfo.swift */; };
+		42D247CE299E9D1A00AF878F /* SeniorReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */; };
+		42D247D0299E9EA400AF878F /* AddUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CF299E9EA400AF878F /* AddUserView.swift */; };
 		42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E9C3192977076200A4CBD9 /* Shell.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +57,10 @@
 		42C444F429006905000BE3B2 /* TM-SwiftToolUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TM-SwiftToolUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITests.swift; sourceTree = "<group>"; };
 		42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		42D247C9299E959700AF878F /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		42D247CB299E9B9B00AF878F /* ComputerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerInfo.swift; sourceTree = "<group>"; };
+		42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReviewView.swift; sourceTree = "<group>"; };
+		42D247CF299E9EA400AF878F /* AddUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserView.swift; sourceTree = "<group>"; };
 		42E9C3192977076200A4CBD9 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +122,10 @@
 				42E9C3192977076200A4CBD9 /* Shell.swift */,
 				42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */,
 				4214361B2984944D00EA1839 /* SeniorReview.swift */,
+				42D247C9299E959700AF878F /* InfoView.swift */,
+				42D247CB299E9B9B00AF878F /* ComputerInfo.swift */,
+				42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */,
+				42D247CF299E9EA400AF878F /* AddUserView.swift */,
 			);
 			path = "TM-SwiftTool";
 			sourceTree = "<group>";
@@ -283,8 +295,12 @@
 				42C444DF29006903000BE3B2 /* MainView.swift in Sources */,
 				42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */,
 				4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */,
+				42D247CC299E9B9B00AF878F /* ComputerInfo.swift in Sources */,
 				42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */,
+				42D247CA299E959700AF878F /* InfoView.swift in Sources */,
+				42D247CE299E9D1A00AF878F /* SeniorReviewView.swift in Sources */,
 				42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */,
+				42D247D0299E9EA400AF878F /* AddUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

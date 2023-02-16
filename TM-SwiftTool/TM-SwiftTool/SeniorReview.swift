@@ -31,6 +31,7 @@ struct SeniorReview
             results["munkiUpdates"] = "SUCCESS - Munki is all up to date."
         }
         
+        //get managed install report from munki
         let munkiManagedInstallReport = shell("defaults read /Library/'Managed Installs'/ManagedInstallReport.plist")
         
         //get substring related to installed items
@@ -41,17 +42,17 @@ struct SeniorReview
         
         if munkiInstalledItems == "dquote>"
         {
-            results["jumpClient"] = "FAILURE - Managed software center installed apps list could not be found. Munki may not be installed properly or is malfunctioning.\n"
-            results["sentinelOne"] = ""
-            results["rapid7"] = ""
-            results["office2021"] = ""
+            results["jumpClient"] = "FAILURE - Managed software center installed apps list could not be found."
+            results["sentinelOne"] = "FAILURE - Managed software center installed apps list could not be found."
+            results["rapid7"] = "FAILURE - Managed software center installed apps list could not be found."
+            results["office2021"] = "FAILURE - Managed software center installed apps list could not be found."
         }
         else
         {
             
             if munkiInstalledItems.contains("JumpClient")
             {
-                results["jumpClient"] = "SUCCESS - Remote Support Jump Client is installed.\n"
+                results["jumpClient"] = "SUCCESS - Remote Support Jump Client is installed."
             }
             else
             {
@@ -88,6 +89,19 @@ struct SeniorReview
                 results["office2021"] = "FAILURE - Office 2021 is NOT installed."
             }
             
+        }
+        
+        //get list of installed applications from MacOS
+        let macOSInstalledApps = shell("ls /Applications")
+        
+        //verify that alertus desktop app is installed
+        if macOSInstalledApps.contains("Alertus Desktop.app")
+        {
+            results["alertusDesktopApp"] = "SUCCESS - Alertus Desktop App is installed."
+        }
+        else
+        {
+            results["alertusDesktopApp"] = "FAILURE - Alertus Desktop App is NOT installed."
         }
         
         
