@@ -41,6 +41,7 @@ struct AddUserView: View
             {
                 Button(action: {
                     
+                    addUserResult = ""
                     
                     DispatchQueue.global(qos: .userInitiated).async
                     {
@@ -71,11 +72,11 @@ struct AddUserView: View
                 }, label: {Text("Add")})
                 .buttonStyle(.borderedProminent)
                 .padding()
-                
-                
-                Text(addUserResult)
-                    .padding()
             }
+            
+            
+            Text(addUserResult)
+                .padding()
             
         }
         

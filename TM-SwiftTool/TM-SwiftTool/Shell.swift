@@ -60,7 +60,6 @@ func sudoShellCreateNewUser(command: String,  password: String, newUserName: Str
         taskOne.arguments = [password]
 
         let taskTwo = Process()
-        print(command)
         taskTwo.launchPath = "/usr/bin/sudo"
         taskTwo.arguments = ["-S", command, "-n", newUserName, "-D"]
 
