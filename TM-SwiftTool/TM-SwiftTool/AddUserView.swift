@@ -34,7 +34,7 @@ struct AddUserView: View
             TextField("New Username", text: $newUserName)
                 .padding([.leading, .trailing], 100)
             
-            SecureField("Password", text: $adminPassword)
+            SecureField("Your Password", text: $adminPassword)
                 .padding([.leading, .trailing], 100)
             
             HStack

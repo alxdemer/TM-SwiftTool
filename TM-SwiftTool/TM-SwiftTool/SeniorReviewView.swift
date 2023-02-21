@@ -11,7 +11,7 @@ import AVFoundation
 struct SeniorReviewView: View
 {
     
-    @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat", "Old Time Rock N' Roll", "Ball For Me - Post Malone", "Hit Me With Your Best Shot"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
+    @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat", "Old Time Rock N' Roll", "Ball For Me - Post Malone", "Hit Me With Your Best Shot", "You Make Me Feel", "92 Explorer", "Goosebumps"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
     @State var isPlaying = false
     @State private var adminPassword = ""
     @State var seniorReview = SeniorReview()
@@ -37,7 +37,7 @@ struct SeniorReviewView: View
             Text("Please enter your admin password:")
                 .padding([.leading, .trailing])
             
-            SecureField("Password", text: $adminPassword).keyboardShortcut(.return).onSubmit
+            SecureField("Your Password", text: $adminPassword).keyboardShortcut(.return).onSubmit
             {
                 isPerformingSeniorReview = true
                 disableSeniorReviewButton = true
@@ -131,12 +131,45 @@ struct SeniorReviewView: View
             {
                 VStack
                 {
-                    Text(results["munkiUpdates"] ?? "")
-                    Text(results["jumpClient"] ?? "")
-                    Text(results["sentinelOne"] ?? "")
-                    Text(results["rapid7"] ?? "")
-                    Text(results["office2021"] ?? "")
-                    Text(results["alertusDesktopApp"] ?? "")
+                    if (results["munkiUpdates"] != "")
+                    {
+                        Text(results["munkiUpdates"] ?? "")
+                    }
+                    
+                    if (results["jumpClient"] != "")
+                    {
+                        Text(results["jumpClient"] ?? "")
+                    }
+                    
+                    if (results["sentinelOne"] != "")
+                    {
+                        Text(results["sentinelOne"] ?? "")
+                    }
+                    
+                    if (results["rapid7"] != "")
+                    {
+                        Text(results["rapid7"] ?? "")
+                    }
+                    
+                    if (results["office2021"] != "")
+                    {
+                        Text(results["office2021"] ?? "")
+                    }
+                    
+                    if (results["alertusDesktopApp"] != "")
+                    {
+                        Text(results["alertusDesktopApp"] ?? "")
+                    }
+                    
+                    if (results["driveSmartStatus"] != "")
+                    {
+                        Text(results["driveSmartStatus"] ?? "")
+                    }
+                    
+                    if (results["batteryCapacity"] != "")
+                    {
+                        Text(results["batteryCapacity"] ?? "")
+                    }
                     
                 }
                 .padding()

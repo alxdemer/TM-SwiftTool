@@ -134,7 +134,7 @@ struct InfoView: View
             VStack
             {
                 Text("© 2023 RIT ITS")
-                Text("Beta 3")
+                Text("Beta 4")
             }
             .padding()
             
