@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
-struct MainView: View {
+struct MainView: View
+{
     
     var body: some View
     {

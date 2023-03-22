@@ -11,7 +11,7 @@ import AVFoundation
 struct SeniorReviewView: View
 {
     
-    @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat", "Old Time Rock N' Roll", "Ball For Me - Post Malone", "Hit Me With Your Best Shot", "You Make Me Feel", "92 Explorer", "Goosebumps"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
+    @State var audioPlayer = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: ["Life is a Highway", "No Pomegranates Trap Remix", "Smash Mouth - All Star","The Home Depot Beat", "Old Time Rock N' Roll", "Ball For Me - Post Malone", "Hit Me With Your Best Shot", "You Make Me Feel", "92 Explorer", "Goosebumps", "George Washington Type Beat", "Boing!", "Undertale - Megalovania", "Cbat"].randomElement(), withExtension: "mp3", subdirectory: "Songs")!)
     @State var isPlaying = false
     @State private var adminPassword = ""
     @State var userMessage = ""
@@ -177,7 +177,7 @@ struct SeniorReviewView: View
             {
                 
                 //if the admin password is not correct, do not start Senior Review, and delete the adminPassword from keychain
-                if seniorReview.verifyAdminPassword() == false
+                if !VerifyAdminPassword()
                 {
                     deleteFromKeychain()
     

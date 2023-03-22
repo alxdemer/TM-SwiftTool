@@ -10,22 +10,6 @@ import AVFAudio
 
 struct SeniorReview
 {
-    //function to verify that the adminPassword provided is correct
-    func verifyAdminPassword() -> Bool
-    {
-        
-        var adminPasswordIsCorrect = true
-        
-        let adminPasswordResponse = sudoShell(command: "-i", argument: "", password: getFromKeychain()!)
-        
-        if adminPasswordResponse.contains("Password:Sorry, try again.")
-        {
-            adminPasswordIsCorrect = false
-        }
-        
-        return adminPasswordIsCorrect
-    }
-    
     //function to perform Senior Review
     func start() -> [String: String]
     {

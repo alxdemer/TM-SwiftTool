@@ -9,57 +9,31 @@ import Foundation
 import Security
 import LocalAuthentication
 
-//adds the adminPassword to keychain and stores it in the secure enclave
+//adds the adminPassword to Keychain
 func addToKeychain(adminPassword: String) -> Bool
 {
     
-    //create local authorization context
-    let context = LAContext()
+    // Define query parameters
+    let query: [String: Any] = [
+        kSecClass as String: kSecClassGenericPassword,
+        kSecAttrService as String: "ResLab.TM-SwiftTool",
+        kSecAttrAccount as String: NSUserName(),
+        kSecValueData as String: adminPassword.data(using: .utf8)!
+    ]
     
-    //allow the user to authenticate if necessary
-    context.interactionNotAllowed = false
+    // Add item to Keychain
+    let status = SecItemAdd(query as CFDictionary, nil)
     
-    //create a variable to hold the error
-    var error: NSError?
     
-    //determine if the context can be authenticated
-    let contextAuthenticationSuccessful = context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error)
-
-    //if it can be then continue
-    if contextAuthenticationSuccessful
-    {
-        
-        
-        // Define query parameters
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: "ResLab.TM-SwiftTool",
-            kSecAttrAccount as String: NSUserName(),
-            kSecUseAuthenticationContext as String: context,
-            kSecValueData as String: adminPassword.data(using: .utf8)!
-        ]
-        
-        // Add item to keychain
-        let status = SecItemAdd(query as CFDictionary, nil)
-        
-        
-        // Check if item was added successfully
-        print("Result of adding keychain: " + status.description)
-        if status != errSecSuccess {
-            return false
-        }
-        
-        return true
-    }
-    else
-    {
+    // Check if item was added successfully
+    if status != errSecSuccess {
         return false
     }
     
-    
+    return true
 }
 
-//gets the adminPassword from the secure enclave via keychain
+//gets the adminPassword from Keychain
 func getFromKeychain() -> String? {
     
     // Define query parameters
@@ -72,7 +46,7 @@ func getFromKeychain() -> String? {
         kSecReturnData as String: true
     ]
     
-    // Retrieve item from keychain
+    // Retrieve item from Keychain
     var item: CFTypeRef?
     let status = SecItemCopyMatching(query as CFDictionary, &item)
     
@@ -81,7 +55,7 @@ func getFromKeychain() -> String? {
         return nil
     }
     
-    // Extract password from keychain data
+    // Extract password from Keychain data
     guard let keychainItem = item as? [String: Any],
           let passwordData = keychainItem[kSecValueData as String] as? Data,
           let password = String(data: passwordData, encoding: .utf8)
@@ -92,7 +66,7 @@ func getFromKeychain() -> String? {
     return password
 }
 
-//deletes the adminPassword from the secure enclave via keychain
+//deletes the adminPassword from Keychain
 func deleteFromKeychain()
 {
     //define query parameters

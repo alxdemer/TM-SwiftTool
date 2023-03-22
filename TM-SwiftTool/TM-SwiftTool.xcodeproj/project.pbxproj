@@ -10,6 +10,7 @@
 		4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */ = {isa = PBXBuildFile; productRef = 4210B2BA29071224000A7F0E /* DeviceGuru */; };
 		4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214361B2984944D00EA1839 /* SeniorReview.swift */; };
 		421436222984AF4400EA1839 /* Songs in Resources */ = {isa = PBXBuildFile; fileRef = 421436212984AF4400EA1839 /* Songs */; };
+		424FD40129CBB43800E02EAF /* VerifyAdminPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */; };
 		42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */; };
 		42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */; };
 		42C444DF29006903000BE3B2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* MainView.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		4214361B2984944D00EA1839 /* SeniorReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReview.swift; sourceTree = "<group>"; };
 		421436212984AF4400EA1839 /* Songs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Songs; path = Assets.xcassets/Songs; sourceTree = "<group>"; };
+		424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAdminPassword.swift; sourceTree = "<group>"; };
 		42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacModelFinder.swift; sourceTree = "<group>"; };
 		42C444D929006903000BE3B2 /* TM-SwiftTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TM-SwiftTool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolApp.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */,
 				42D247CF299E9EA400AF878F /* AddUserView.swift */,
 				6DF2C2A429CA2AD600E976D5 /* Keychain.swift */,
+				424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */,
 				42C444E229006905000BE3B2 /* Preview Content */,
 			);
 			path = "TM-SwiftTool";
@@ -304,6 +307,7 @@
 				42D247CE299E9D1A00AF878F /* SeniorReviewView.swift in Sources */,
 				42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */,
 				42D247D0299E9EA400AF878F /* AddUserView.swift in Sources */,
+				424FD40129CBB43800E02EAF /* VerifyAdminPassword.swift in Sources */,
 				6DF2C2A529CA2AD600E976D5 /* Keychain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
