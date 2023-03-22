@@ -37,7 +37,7 @@ struct SeniorReview
         //get managed install report from munki
         let munkiManagedInstallReport = shell("defaults read /Library/'Managed Installs'/ManagedInstallReport.plist")
         
-        //if munkiManagedInstallReport content comes back with does not exist, set all expected apps results to failure
+        //if munki managed install report content comes back with does not exist, set all expected apps results to failure
         if munkiManagedInstallReport.contains("does not exist")
         {
             results["jumpClient"] = "FAILURE - Managed software center installed apps list could not be found."
@@ -53,6 +53,9 @@ struct SeniorReview
             let range = start..<end
             let munkiInstalledItems = munkiManagedInstallReport[range]
             
+            //also get list of installed applications from MacOS
+            let macOSInstalledApps = shell("ls /Applications")
+            
             if munkiInstalledItems.contains("JumpClient")
             {
                 results["jumpClient"] = "SUCCESS - Remote Support Jump Client is installed."
@@ -62,8 +65,7 @@ struct SeniorReview
                 results["jumpClient"] = "FAILURE - Remote Support Jump Client is not installed."
             }
             
-            
-            if munkiInstalledItems.contains("SentinelOne") && munkiInstalledItems.contains("sentinelone_registration_token")
+            if munkiInstalledItems.contains("SentinelOne") || macOSInstalledApps.contains("SentinelOne")
             {
                 results["sentinelOne"] = "SUCCESS - Sentinel One is installed."
             }
@@ -92,19 +94,16 @@ struct SeniorReview
                 results["office2021"] = "FAILURE - Office 2021 is not installed."
             }
             
-        }
-        
-        //get list of installed applications from MacOS
-        let macOSInstalledApps = shell("ls /Applications")
-        
-        //verify that alertus desktop app is installed
-        if macOSInstalledApps.contains("Alertus Desktop.app")
-        {
-            results["alertusDesktopApp"] = "SUCCESS - Alertus Desktop App is installed."
-        }
-        else
-        {
-            results["alertusDesktopApp"] = "FAILURE - Alertus Desktop App is not installed."
+            //verify that alertus desktop app is installed
+            if macOSInstalledApps.contains("Alertus Desktop.app")
+            {
+                results["alertusDesktopApp"] = "SUCCESS - Alertus Desktop App is installed."
+            }
+            else
+            {
+                results["alertusDesktopApp"] = "FAILURE - Alertus Desktop App is not installed."
+            }
+            
         }
         
         //get drive info
