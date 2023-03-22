@@ -10,13 +10,32 @@ import AVFAudio
 
 struct SeniorReview
 {
+    //function to verify that the adminPassword provided is correct
+    func verifyAdminPassword() -> Bool
+    {
+        
+        var adminPasswordIsCorrect = true
+        
+        let adminPasswordResponse = sudoShell(command: "-i", argument: "", password: getFromKeychain()!)
+        
+        if adminPasswordResponse.contains("Password:Sorry, try again.")
+        {
+            adminPasswordIsCorrect = false
+        }
+        
+        return adminPasswordIsCorrect
+    }
     
-    func start(AdminPassword: String) -> [String: String]
+    //function to perform Senior Review
+    func start() -> [String: String]
     {
         
         var results: [String: String] = [:]
         
-        let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: AdminPassword)
+        let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: getFromKeychain()!)
+        
+        //after making use of the adminPassword stored in keychain, delete it
+        deleteFromKeychain()
         
         if munkiUpdatesResponse.contains("no such file or directory") || munkiUpdatesResponse.contains("command not found")
         {

@@ -8,33 +8,49 @@
 import Foundation
 import ServiceManagement
 
-func shell(_ command: String) -> String {
+func shell(_ command: String) -> String
+{
+    //create a process and a pipe
     let task = Process()
+    
+    //create a pipe to handle output
     let pipe = Pipe()
     
+    //set the standard output and standard error to the pipe
     task.standardOutput = pipe
     task.standardError = pipe
+    
+    //set the arguments with the corresponding command
     task.arguments = ["-c", command]
+    
+    //set the launch path for the process at "/bin/sh"
     task.launchPath = "/bin/sh"
+    
+    //set standard input to nil
     task.standardInput = nil
+    
+    //launch the process
     task.launch()
     
+    //set data to the output from the pipe
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    
+    //convert the data to a string
     let output = String(data: data, encoding: .utf8)!
     
-    
+    //return the string
     return output
 }
 
 func sudoShell(command: String, argument: String, password: String) -> String {
     
-    let taskOne = Process()
+        let taskOne = Process()
         taskOne.launchPath = "/bin/echo"
         taskOne.arguments = [password]
 
         let taskTwo = Process()
         taskTwo.launchPath = "/usr/bin/sudo"
-        taskTwo.arguments = ["-S", command, argument]
+        taskTwo.arguments = ["-k", "-S", command, argument]
 
         let pipeBetween:Pipe = Pipe()
         taskOne.standardOutput = pipeBetween
@@ -55,13 +71,13 @@ func sudoShell(command: String, argument: String, password: String) -> String {
 
 func sudoShellCreateNewUser(command: String,  password: String, newUserName: String){
     
-    let taskOne = Process()
+        let taskOne = Process()
         taskOne.launchPath = "/bin/echo"
         taskOne.arguments = [password]
 
         let taskTwo = Process()
         taskTwo.launchPath = "/usr/bin/sudo"
-        taskTwo.arguments = ["-S", command, "-n", newUserName, "-D"]
+        taskTwo.arguments = ["-k", "-S", command, "-n", newUserName, "-D"]
 
         let pipeBetween:Pipe = Pipe()
         taskOne.standardOutput = pipeBetween
@@ -75,7 +91,5 @@ func sudoShellCreateNewUser(command: String,  password: String, newUserName: Str
         taskTwo.launch()
 
         let data = pipeToMe.fileHandleForReading.readDataToEndOfFile()
-        let output : String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-    
-   
+        let _ : String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
 }
