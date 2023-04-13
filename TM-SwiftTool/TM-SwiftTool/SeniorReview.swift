@@ -56,6 +56,8 @@ struct SeniorReview
             //also get list of installed applications from MacOS
             let macOSInstalledApps = shell("ls /Applications")
             
+            print(macOSInstalledApps)
+            
             if munkiInstalledItems.contains("JumpClient")
             {
                 results["jumpClient"] = "SUCCESS - Remote Support Jump Client is installed."
@@ -102,6 +104,16 @@ struct SeniorReview
             else
             {
                 results["alertusDesktopApp"] = "FAILURE - Alertus Desktop App is not installed."
+            }
+            
+            //verify that spirion app is installed
+            if macOSInstalledApps.contains("Spirion.app")
+            {
+                results["spirionApp"] = "SUCCESS - Spirion App is installed."
+            }
+            else
+            {
+                results["spirionApp"] = "FAILURE - Spirion App is not installed."
             }
             
         }

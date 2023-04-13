@@ -15,7 +15,7 @@ struct TM_SwiftToolApp: App
         WindowGroup
         {
             MainView()
-                .frame(minWidth: 700, maxWidth: .infinity, minHeight: 500, maxHeight: .infinity)
+                .frame(minWidth: 800, maxWidth: .infinity, minHeight: 500, maxHeight: .infinity)
         }
         
     }

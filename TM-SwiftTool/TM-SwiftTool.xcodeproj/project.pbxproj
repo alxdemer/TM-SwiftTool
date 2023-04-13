@@ -11,7 +11,6 @@
 		4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214361B2984944D00EA1839 /* SeniorReview.swift */; };
 		421436222984AF4400EA1839 /* Songs in Resources */ = {isa = PBXBuildFile; fileRef = 421436212984AF4400EA1839 /* Songs */; };
 		424FD40129CBB43800E02EAF /* VerifyAdminPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */; };
-		42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */; };
 		42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */; };
 		42C444DF29006903000BE3B2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* MainView.swift */; };
 		42C444E129006905000BE3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C444E029006905000BE3B2 /* Assets.xcassets */; };
@@ -20,7 +19,7 @@
 		42C444F929006905000BE3B2 /* TM_SwiftToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */; };
 		42C444FB29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */; };
 		42D247CA299E959700AF878F /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247C9299E959700AF878F /* InfoView.swift */; };
-		42D247CC299E9B9B00AF878F /* ComputerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CB299E9B9B00AF878F /* ComputerInfo.swift */; };
+		42D247CC299E9B9B00AF878F /* MacInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CB299E9B9B00AF878F /* MacInfo.swift */; };
 		42D247CE299E9D1A00AF878F /* SeniorReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */; };
 		42D247D0299E9EA400AF878F /* AddUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CF299E9EA400AF878F /* AddUserView.swift */; };
 		42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E9C3192977076200A4CBD9 /* Shell.swift */; };
@@ -48,7 +47,6 @@
 		4214361B2984944D00EA1839 /* SeniorReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReview.swift; sourceTree = "<group>"; };
 		421436212984AF4400EA1839 /* Songs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Songs; path = Assets.xcassets/Songs; sourceTree = "<group>"; };
 		424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAdminPassword.swift; sourceTree = "<group>"; };
-		42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacModelFinder.swift; sourceTree = "<group>"; };
 		42C444D929006903000BE3B2 /* TM-SwiftTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TM-SwiftTool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolApp.swift; sourceTree = "<group>"; };
 		42C444DE29006903000BE3B2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -60,7 +58,7 @@
 		42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITests.swift; sourceTree = "<group>"; };
 		42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		42D247C9299E959700AF878F /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		42D247CB299E9B9B00AF878F /* ComputerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerInfo.swift; sourceTree = "<group>"; };
+		42D247CB299E9B9B00AF878F /* MacInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacInfo.swift; sourceTree = "<group>"; };
 		42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReviewView.swift; sourceTree = "<group>"; };
 		42D247CF299E9EA400AF878F /* AddUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserView.swift; sourceTree = "<group>"; };
 		42E9C3192977076200A4CBD9 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 			children = (
 				42C444DB29006903000BE3B2 /* TM-SwiftTool */,
 				42C444ED29006905000BE3B2 /* TM-SwiftToolTests */,
-				42C444F729006905000BE3B2 /* TM-SwiftToolUITests */,
 				42C444DA29006903000BE3B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,10 +120,9 @@
 				42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */,
 				42C444DE29006903000BE3B2 /* MainView.swift */,
 				42E9C3192977076200A4CBD9 /* Shell.swift */,
-				42C09B8629844F7F00AF0AD2 /* MacModelFinder.swift */,
 				4214361B2984944D00EA1839 /* SeniorReview.swift */,
 				42D247C9299E959700AF878F /* InfoView.swift */,
-				42D247CB299E9B9B00AF878F /* ComputerInfo.swift */,
+				42D247CB299E9B9B00AF878F /* MacInfo.swift */,
 				42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */,
 				42D247CF299E9EA400AF878F /* AddUserView.swift */,
 				6DF2C2A429CA2AD600E976D5 /* Keychain.swift */,
@@ -139,6 +135,7 @@
 		42C444E229006905000BE3B2 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				42C444F729006905000BE3B2 /* TM-SwiftToolUITests */,
 				42C444E329006905000BE3B2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -254,6 +251,7 @@
 			mainGroup = 42C444D029006903000BE3B2;
 			packageReferences = (
 				4210B2B929071224000A7F0E /* XCRemoteSwiftPackageReference "DeviceGuru" */,
+				422AFACF29E775100053B460 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 			);
 			productRefGroup = 42C444DA29006903000BE3B2 /* Products */;
 			projectDirPath = "";
@@ -299,9 +297,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42C444DF29006903000BE3B2 /* MainView.swift in Sources */,
-				42C09B8729844F7F00AF0AD2 /* MacModelFinder.swift in Sources */,
 				4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */,
-				42D247CC299E9B9B00AF878F /* ComputerInfo.swift in Sources */,
+				42D247CC299E9B9B00AF878F /* MacInfo.swift in Sources */,
 				42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */,
 				42D247CA299E959700AF878F /* InfoView.swift in Sources */,
 				42D247CE299E9D1A00AF878F /* SeniorReviewView.swift in Sources */,
@@ -644,6 +641,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.0.0;
+			};
+		};
+		422AFACF29E775100053B460 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devicekit/DeviceKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

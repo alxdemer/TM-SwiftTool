@@ -123,6 +123,7 @@ struct AddUserView: View
                     
                 }, label: {Text("Add")})
                 .buttonStyle(.borderedProminent)
+                .disabled(isAddingUser)
                 .padding()
             }
             

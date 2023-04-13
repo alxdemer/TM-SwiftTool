@@ -10,7 +10,7 @@ import SwiftUI
 struct InfoView: View
 {
     
-    private var computerInfo = ComputerInfo()
+    private var computerInfo = MacInfo()
     
     var body: some View
     {
@@ -93,7 +93,7 @@ struct InfoView: View
                     {
                         Text("Model: ")
                             .bold()
-                        Text(computerInfo.macModelFinder.getMacModel()!.description)
+                        Text(computerInfo.getMacModel())
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 5)
