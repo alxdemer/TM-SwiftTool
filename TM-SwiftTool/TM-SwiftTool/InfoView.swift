@@ -133,8 +133,8 @@ struct InfoView: View
             
             VStack
             {
+                Text("Version 1.0")
                 Text("© 2023 RIT ITS")
-                Text("Beta 5")
             }
             .padding()
             
