@@ -6,171 +6,221 @@
 //
 
 import Foundation
-import AVFAudio
+import AVFoundation
 
-struct SeniorReview
-{
-    //function to perform Senior Review
-    func start() -> [String: String]
-    {
+public protocol SeniorReviewDelegate: AnyObject{
+    func audioTesterError(error: Error)
+    func seniorReviewComplete(seniorReviewResults: [SeniorReviewResult])
+    func audioTesterStarted()
+    func audioTesterStopped()
+}
+
+public class SeniorReview{
+    
+    public var audioTester: AVAudioPlayer? = nil
+    public weak var delegate: SeniorReviewDelegate? = nil
+    
+    public init(){
         
-        var results: [String: String] = [:]
-        
-        let munkiUpdatesResponse = sudoShell(command: "/usr/local/munki/managedsoftwareupdate", argument: "--checkonly", password: getFromKeychain()!)
-        
-        //after making use of the adminPassword stored in keychain, delete it
-        deleteFromKeychain()
-        
-        if munkiUpdatesResponse.contains("no such file or directory") || munkiUpdatesResponse.contains("command not found")
-        {
-            results["munkiUpdates"] = "FAILURE - Could not talk to managed software center. It may not be installed or is malfunctioning."
-        }
-        else if munkiUpdatesResponse.contains("The following items will be installed or upgraded:")
-        {
-            results["munkiUpdates"] = "FAILURE - Munki has pending updates"
-        }
-        else
-        {
-            results["munkiUpdates"] = "SUCCESS - Munki is all up to date."
+        guard let songDirectory = Bundle.main.url(forResource: Song.randomCase().rawValue, withExtension: "mp3", subdirectory: "Songs") else {
+            print("Failed to find the songs directory.")
+            return
         }
         
-        //get managed install report from munki
-        let munkiManagedInstallReport = shell("defaults read /Library/'Managed Installs'/ManagedInstallReport.plist")
+        do{
+            self.audioTester = try AVAudioPlayer(contentsOf: songDirectory)
+        }catch{
+            print("Failed to create an AVAudioPlayer object. \(error.localizedDescription)")
+        }
         
-        //if munki managed install report content comes back with does not exist, set all expected apps results to failure
-        if munkiManagedInstallReport.contains("does not exist")
-        {
-            results["jumpClient"] = "FAILURE - Managed software center installed apps list could not be found."
-            results["sentinelOne"] = ""
-            results["rapid7"] = ""
-            results["office2021"] = ""
-        }
-        else
-        {
-            //if munkiManagedInstallReport content is present, substring it to get the installed items
-            let start = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "InstalledItems")!.lowerBound)
-            let end = munkiManagedInstallReport.index(before: munkiManagedInstallReport.range(of: "ItemsToInstall")!.lowerBound)
-            let range = start..<end
-            let munkiInstalledItems = munkiManagedInstallReport[range]
+    }
+    
+    /// Starts the Senior Review which checks the apps, storage health, battery health, camera, and audio.
+    public func start() async{
+        
+        //stop any audioTester that is currently playing
+        audioTester?.stop()
+        
+        //inform delegate audio tester stopped
+        delegate?.audioTesterStopped()
+        
+        var seniorReviewResults: [SeniorReviewResult] = []
+        
+        async let appsResults = verifyApps()
+        async let verifyStorageHealthResult = verifyStorageHealth()
+        async let verifyBatteryHealthResult = verifyBatteryHealth()
+        
+        //verify that the camera works
+        let _ = shell("open facetime://")
+        sleep(8)
+        let _ = shell("killall FaceTime")
+        
+        await seniorReviewResults += appsResults
+        await seniorReviewResults.append(verifyStorageHealthResult)
+        await seniorReviewResults.append(verifyBatteryHealthResult)
+        
+        do{
             
-            //also get list of installed applications from MacOS
-            let macOSInstalledApps = shell("ls /Applications")
+            //create new audio player object with random song
+            audioTester = try AVAudioPlayer(contentsOf: Bundle.main.url(forResource: Song.randomCase().rawValue, withExtension: "mp3", subdirectory: "Songs")!)
             
-            print(macOSInstalledApps)
+            //set volume to level 3
+            let _ = shell("osascript -e \"set Volume 3\"")
             
-            if munkiInstalledItems.contains("JumpClient")
-            {
-                results["jumpClient"] = "SUCCESS - Remote Support Jump Client is installed."
-            }
-            else
-            {
-                results["jumpClient"] = "FAILURE - Remote Support Jump Client is not installed."
-            }
+            //play the audio
+            audioTester?.play()
             
-            if munkiInstalledItems.contains("SentinelOne") || macOSInstalledApps.contains("SentinelOne")
-            {
-                results["sentinelOne"] = "SUCCESS - Sentinel One is installed."
-            }
-            else
-            {
-                results["sentinelOne"] = "FAILURE - Sentinel One is not installed."
-            }
+            //inform delegate that audio tester started
+            delegate?.audioTesterStarted()
             
+        }catch{
             
-            if munkiInstalledItems.contains("Rapid7Agent")
-            {
-                results["rapid7"] = "SUCCESS - Rapid7 Agent is installed."
-            }
-            else
-            {
-                results["rapid7"] = "FAILURE - Rapid7 Agent is not installed."
-            }
+            //inform delegate that error occurred when trying to start the audio tester
+            delegate?.audioTesterError(error: SeniorReviewError.failedToStartAudioTest(error: error))
             
-            
-            if munkiInstalledItems.contains("Office 2021 VL")
-            {
-                results["office2021"] = "SUCCESS - Office 2021 is installed."
-            }
-            else
-            {
-                results["office2021"] = "FAILURE - Office 2021 is not installed."
-            }
-            
-            //verify that alertus desktop app is installed
-            if macOSInstalledApps.contains("Alertus Desktop.app")
-            {
-                results["alertusDesktopApp"] = "SUCCESS - Alertus Desktop App is installed."
-            }
-            else
-            {
-                results["alertusDesktopApp"] = "FAILURE - Alertus Desktop App is not installed."
-            }
-            
-            //verify that spirion app is installed
-            if macOSInstalledApps.contains("Spirion.app")
-            {
-                results["spirionApp"] = "SUCCESS - Spirion App is installed."
-            }
-            else
-            {
-                results["spirionApp"] = "FAILURE - Spirion App is not installed."
-            }
+            delegate?.seniorReviewComplete(seniorReviewResults: seniorReviewResults)
             
         }
+        
+        delegate?.seniorReviewComplete(seniorReviewResults: seniorReviewResults)
+    }
+    
+    /// Verifies that the correct apps are installed.
+    ///
+    /// - Returns: An array of Result enums indicating if each app is installed.
+    private func verifyApps() async -> [SeniorReviewResult] {
+        
+        var results: [SeniorReviewResult] = []
+        
+        // get list of installed applications from MacOS
+        let macOSInstalledApps = shell("ls /Applications")
+        
+        if macOSInstalledApps.contains("Alertus Desktop.app"){
+            results.append(SeniorReviewResult.success(details: "Alertus Desktop App is installed."))
+        }else{
+            results.append(SeniorReviewResult.failure(details: "Alertus Desktop App is not installed."))
+        }
+        
+        if macOSInstalledApps.contains("Representative Console - support.rit.edu.app"){
+            results.append(SeniorReviewResult.success(details: "Remote Support Jump Client is installed."))
+        }else{
+            results.append(SeniorReviewResult.failure(details: "Remote Support Jump Client is not installed."))
+        }
+        
+        if macOSInstalledApps.contains("SentinelOne"){
+            results.append(SeniorReviewResult.success(details: "Sentinel One is installed."))
+        }else{
+            results.append(SeniorReviewResult.failure(details: "Sentinel One is not installed."))
+        }
+        
+        if macOSInstalledApps.contains("Spirion.app"){
+            results.append(SeniorReviewResult.success(details: "Spirion is installed."))
+        }else{
+            results.append(SeniorReviewResult.failure(details: "Spirion is not installed."))
+        }
+        
+        if macOSInstalledApps.contains("Microsoft PowerPoint.app") && macOSInstalledApps.contains("Microsoft Excel.app") && macOSInstalledApps.contains("Microsoft Word.app") && macOSInstalledApps.contains("Microsoft OneNote.app"){
+            
+            results.append(SeniorReviewResult.success(details: "Microsoft Office is installed."))
+            
+        }else{
+            results.append(SeniorReviewResult.failure(details: "Microsoft Office is not installed."))
+        }
+        
+        if macOSInstalledApps.contains("Microsoft Outlook.app"){
+            results.append(SeniorReviewResult.success(details: "Microsoft Outlook is installed."))
+        }else{
+            results.append(SeniorReviewResult.failure(details: "Microsoft Outlook is not installed."))
+        }
+        
+        if macOSInstalledApps.contains("RIT Self Service.app"){
+            results.append(SeniorReviewResult.success(details: "RIT Self Service app is installed."))
+        }else{
+            results.append(SeniorReviewResult.failure(details: "RIT Self Service app is not installed."))
+        }
+        
+        if macOSInstalledApps.contains("Jamf Connect.app"){
+            results.append(SeniorReviewResult.success(details: "Jamp Connect is installed."))
+        }else{
+            results.append(SeniorReviewResult.failure(details: "Jamp Connect is not installed."))
+        }
+        
+        return results
+        
+    }
+    
+    /// Verifies the health of the storage via the "diskutil info /dev/disk0" shell command
+    ///
+    /// - Returns: Result enum indicating the storage health.
+    private func verifyStorageHealth() async -> SeniorReviewResult{
         
         //get drive info
         let driveInfo = shell("diskutil info /dev/disk0")
         
         //get the smart status of the drive
-        var start = driveInfo.index(after: driveInfo.range(of: "SMART Status:             ")!.upperBound)
-        var end = driveInfo.index(before: driveInfo.range(of: "\n   Disk Size:")!.lowerBound)
-        var range = start..<end
-        let smartStatus = driveInfo[range]
+        let start = driveInfo.index(after: driveInfo.range(of: "SMART Status:             ")!.upperBound)
+        let end = driveInfo.index(before: driveInfo.range(of: "\n   Disk Size:")!.lowerBound)
+        let smartStatus = driveInfo[start..<end]
         
         //verify that smart status of the drive checks out
-        if smartStatus == "Verified"
-        {
-            results["driveSmartStatus"] = "SUCCESS - SMART Status reports that drive health is good."
+        if smartStatus == "Verified"{
+            return SeniorReviewResult.success(details: "SMART Status reports that storage health is good.")
         }
-        else if smartStatus == "Failing"
-        {
-            results["driveSmartStatus"] = "FAILURE - SMART Status reports that drive health is bad."
+        else if smartStatus == "Failing"{
+            return SeniorReviewResult.failure(details: "SMART Status reports that storage health is bad.")
+        }else{
+            return SeniorReviewResult.failure(details: "Could not verify the health of the storage.")
         }
-        else
-        {
-            results["driveSmartStatus"] = ""
-        }
+        
+    }
+    
+    /// Verifies the battery health via the "system_profiler SPPowerDataType" shell command.
+    ///
+    /// - Returns: Result enum indicating the battery health.
+    private func verifyBatteryHealth() async -> SeniorReviewResult{
         
         //get power info
         let powerInfo = shell("system_profiler SPPowerDataType")
         
         //if the power info contains battery information, get the maximum capacity
-        if powerInfo.contains("Maximum Capacity:")
-        {
+        if powerInfo.contains("Maximum Capacity:"){
             
             //get the maximum capacity of the battery
-            start = powerInfo.index(after: powerInfo.range(of: "Maximum Capacity:")!.upperBound)
-            end = powerInfo.index(before: powerInfo.range(of: "\n    System Power Settings:")!.lowerBound)
-            range = start..<end
-            let batteryCapacity = powerInfo[range].dropLast()
+            let start = powerInfo.index(after: powerInfo.range(of: "Maximum Capacity:")!.upperBound)
+            let end = powerInfo.index(before: powerInfo.range(of: "\n    System Power Settings:")!.lowerBound)
+            let batteryCapacity = powerInfo[start..<end].dropLast()
             
             //verify that battery maximum capacity is above 75%
-            if Int(batteryCapacity)! >= 75
-            {
-                results["batteryCapacity"] = "SUCCESS - Battery health is okay. Maximum capacity is above 75%."
+            if Int(batteryCapacity)! >= 75{
+                return SeniorReviewResult.success(details: "The battery health is okay. Maximum capacity is above 75%.")
+            }else{
+                return SeniorReviewResult.failure(details: "The maximum capacity of the battery is below 75%. Consider replacing the battery.")
             }
-            else
-            {
-                results["batteryCapacity"] = "FAILURE - Maximum capacity of battery is below 75%. Consider replacing battery."
-            }
+            
+        //else
+        }else{
+            
+            return SeniorReviewResult.failure(details: "Could not verify the health of the battery.")
+            
         }
         
-        
-        //verify that the camera works
-        shell("open facetime://")
-        sleep(8)
-        shell("killall FaceTime")
-        
-        return results
     }
+    
+    public func startAudioTester(){
+        
+        do{
+            audioTester = try AVAudioPlayer(contentsOf: Bundle.main.url(forResource: Song.randomCase().rawValue, withExtension: "mp3", subdirectory: "Songs")!)
+            let _ = shell("osascript -e \"set Volume 3\"")
+            audioTester?.play()
+            
+        }catch{
+            delegate?.audioTesterError(error: SeniorReviewError.failedToStartAudioTest(error: error))
+        }
+        
+    }
+    
+    public func stopAudioTester(){
+        audioTester?.stop()
+    }
+    
 }

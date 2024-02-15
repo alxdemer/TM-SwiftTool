@@ -8,14 +8,13 @@
 import SwiftUI
 
 @main
-struct TM_SwiftToolApp: App
-{
-    var body: some Scene
-    {
-        WindowGroup
-        {
+struct TM_SwiftToolApp: App{
+    
+    var body: some Scene{
+        
+        WindowGroup{
             MainView()
-                .frame(minWidth: 800, maxWidth: .infinity, minHeight: 500, maxHeight: .infinity)
+                .frame(minWidth: 700, minHeight: 600)
         }
         
     }

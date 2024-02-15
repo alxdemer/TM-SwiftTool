@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */ = {isa = PBXBuildFile; productRef = 4210B2BA29071224000A7F0E /* DeviceGuru */; };
+		217184832B7E74340095F9BA /* Songs in Resources */ = {isa = PBXBuildFile; fileRef = 217184822B7E74340095F9BA /* Songs */; };
+		21FC1BFB2B7C45FA006E4DBE /* AdminPasswordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC1BFA2B7C45FA006E4DBE /* AdminPasswordManager.swift */; };
+		21FC1BFD2B7C4618006E4DBE /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC1BFC2B7C4618006E4DBE /* Shell.swift */; };
+		21FC1BFF2B7C462E006E4DBE /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC1BFE2B7C462E006E4DBE /* Enums.swift */; };
+		21FC1C012B7C4640006E4DBE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC1C002B7C4640006E4DBE /* Errors.swift */; };
+		21FC1C052B7C48DA006E4DBE /* SeniorReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC1C042B7C48DA006E4DBE /* SeniorReviewViewModel.swift */; };
+		21FC1C072B7C48FF006E4DBE /* AddUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC1C062B7C48FF006E4DBE /* AddUserViewModel.swift */; };
+		21FC1C092B7C4BDA006E4DBE /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FC1C082B7C4BDA006E4DBE /* InfoViewModel.swift */; };
 		4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4214361B2984944D00EA1839 /* SeniorReview.swift */; };
-		421436222984AF4400EA1839 /* Songs in Resources */ = {isa = PBXBuildFile; fileRef = 421436212984AF4400EA1839 /* Songs */; };
-		424FD40129CBB43800E02EAF /* VerifyAdminPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */; };
 		42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */; };
 		42C444DF29006903000BE3B2 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444DE29006903000BE3B2 /* MainView.swift */; };
 		42C444E129006905000BE3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42C444E029006905000BE3B2 /* Assets.xcassets */; };
@@ -19,11 +24,8 @@
 		42C444F929006905000BE3B2 /* TM_SwiftToolUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */; };
 		42C444FB29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */; };
 		42D247CA299E959700AF878F /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247C9299E959700AF878F /* InfoView.swift */; };
-		42D247CC299E9B9B00AF878F /* MacInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CB299E9B9B00AF878F /* MacInfo.swift */; };
 		42D247CE299E9D1A00AF878F /* SeniorReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */; };
 		42D247D0299E9EA400AF878F /* AddUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D247CF299E9EA400AF878F /* AddUserView.swift */; };
-		42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E9C3192977076200A4CBD9 /* Shell.swift */; };
-		6DF2C2A529CA2AD600E976D5 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF2C2A429CA2AD600E976D5 /* Keychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +46,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		217184822B7E74340095F9BA /* Songs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Songs; sourceTree = "<group>"; };
+		21FC1BFA2B7C45FA006E4DBE /* AdminPasswordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPasswordManager.swift; sourceTree = "<group>"; };
+		21FC1BFC2B7C4618006E4DBE /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
+		21FC1BFE2B7C462E006E4DBE /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		21FC1C002B7C4640006E4DBE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		21FC1C042B7C48DA006E4DBE /* SeniorReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReviewViewModel.swift; sourceTree = "<group>"; };
+		21FC1C062B7C48FF006E4DBE /* AddUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserViewModel.swift; sourceTree = "<group>"; };
+		21FC1C082B7C4BDA006E4DBE /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		4214361B2984944D00EA1839 /* SeniorReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReview.swift; sourceTree = "<group>"; };
-		421436212984AF4400EA1839 /* Songs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Songs; path = Assets.xcassets/Songs; sourceTree = "<group>"; };
-		424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyAdminPassword.swift; sourceTree = "<group>"; };
 		42C444D929006903000BE3B2 /* TM-SwiftTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TM-SwiftTool.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolApp.swift; sourceTree = "<group>"; };
 		42C444DE29006903000BE3B2 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -58,12 +66,9 @@
 		42C444F829006905000BE3B2 /* TM_SwiftToolUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITests.swift; sourceTree = "<group>"; };
 		42C444FA29006905000BE3B2 /* TM_SwiftToolUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TM_SwiftToolUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		42D247C9299E959700AF878F /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		42D247CB299E9B9B00AF878F /* MacInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacInfo.swift; sourceTree = "<group>"; };
 		42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeniorReviewView.swift; sourceTree = "<group>"; };
 		42D247CF299E9EA400AF878F /* AddUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddUserView.swift; sourceTree = "<group>"; };
-		42E9C3192977076200A4CBD9 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		6D22D0C4299EBA9300E51959 /* TM_SwiftTool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TM_SwiftTool.entitlements; sourceTree = "<group>"; };
-		6DF2C2A429CA2AD600E976D5 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4210B2BB29071224000A7F0E /* DeviceGuru in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +96,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21FC1BF72B7C4543006E4DBE /* Supporting Views */ = {
+			isa = PBXGroup;
+			children = (
+				42D247C9299E959700AF878F /* InfoView.swift */,
+				42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */,
+				42D247CF299E9EA400AF878F /* AddUserView.swift */,
+			);
+			path = "Supporting Views";
+			sourceTree = "<group>";
+		};
+		21FC1C022B7C47F1006E4DBE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				21FC1BFC2B7C4618006E4DBE /* Shell.swift */,
+				21FC1BFE2B7C462E006E4DBE /* Enums.swift */,
+				21FC1C002B7C4640006E4DBE /* Errors.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		21FC1C032B7C48A1006E4DBE /* Supporting View Models */ = {
+			isa = PBXGroup;
+			children = (
+				21FC1C082B7C4BDA006E4DBE /* InfoViewModel.swift */,
+				21FC1C042B7C48DA006E4DBE /* SeniorReviewViewModel.swift */,
+				21FC1C062B7C48FF006E4DBE /* AddUserViewModel.swift */,
+			);
+			path = "Supporting View Models";
+			sourceTree = "<group>";
+		};
 		42C444D029006903000BE3B2 = {
 			isa = PBXGroup;
 			children = (
@@ -114,19 +148,16 @@
 		42C444DB29006903000BE3B2 /* TM-SwiftTool */ = {
 			isa = PBXGroup;
 			children = (
-				6D22D0C4299EBA9300E51959 /* TM_SwiftTool.entitlements */,
-				42C444E029006905000BE3B2 /* Assets.xcassets */,
-				421436212984AF4400EA1839 /* Songs */,
 				42C444DC29006903000BE3B2 /* TM_SwiftToolApp.swift */,
 				42C444DE29006903000BE3B2 /* MainView.swift */,
-				42E9C3192977076200A4CBD9 /* Shell.swift */,
+				21FC1BF72B7C4543006E4DBE /* Supporting Views */,
+				21FC1C032B7C48A1006E4DBE /* Supporting View Models */,
 				4214361B2984944D00EA1839 /* SeniorReview.swift */,
-				42D247C9299E959700AF878F /* InfoView.swift */,
-				42D247CB299E9B9B00AF878F /* MacInfo.swift */,
-				42D247CD299E9D1A00AF878F /* SeniorReviewView.swift */,
-				42D247CF299E9EA400AF878F /* AddUserView.swift */,
-				6DF2C2A429CA2AD600E976D5 /* Keychain.swift */,
-				424FD40029CBB43800E02EAF /* VerifyAdminPassword.swift */,
+				21FC1BFA2B7C45FA006E4DBE /* AdminPasswordManager.swift */,
+				21FC1C022B7C47F1006E4DBE /* Resources */,
+				6D22D0C4299EBA9300E51959 /* TM_SwiftTool.entitlements */,
+				42C444E029006905000BE3B2 /* Assets.xcassets */,
+				217184822B7E74340095F9BA /* Songs */,
 				42C444E229006905000BE3B2 /* Preview Content */,
 			);
 			path = "TM-SwiftTool";
@@ -175,7 +206,6 @@
 			);
 			name = "TM-SwiftTool";
 			packageProductDependencies = (
-				4210B2BA29071224000A7F0E /* DeviceGuru */,
 			);
 			productName = "TM-SwiftTool";
 			productReference = 42C444D929006903000BE3B2 /* TM-SwiftTool.app */;
@@ -250,8 +280,6 @@
 			);
 			mainGroup = 42C444D029006903000BE3B2;
 			packageReferences = (
-				4210B2B929071224000A7F0E /* XCRemoteSwiftPackageReference "DeviceGuru" */,
-				422AFACF29E775100053B460 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 			);
 			productRefGroup = 42C444DA29006903000BE3B2 /* Products */;
 			projectDirPath = "";
@@ -269,7 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				421436222984AF4400EA1839 /* Songs in Resources */,
+				217184832B7E74340095F9BA /* Songs in Resources */,
 				42C444E429006905000BE3B2 /* Preview Assets.xcassets in Resources */,
 				42C444E129006905000BE3B2 /* Assets.xcassets in Resources */,
 			);
@@ -298,14 +326,17 @@
 			files = (
 				42C444DF29006903000BE3B2 /* MainView.swift in Sources */,
 				4214361C2984944D00EA1839 /* SeniorReview.swift in Sources */,
-				42D247CC299E9B9B00AF878F /* MacInfo.swift in Sources */,
+				21FC1C072B7C48FF006E4DBE /* AddUserViewModel.swift in Sources */,
+				21FC1C092B7C4BDA006E4DBE /* InfoViewModel.swift in Sources */,
 				42C444DD29006903000BE3B2 /* TM_SwiftToolApp.swift in Sources */,
+				21FC1C052B7C48DA006E4DBE /* SeniorReviewViewModel.swift in Sources */,
 				42D247CA299E959700AF878F /* InfoView.swift in Sources */,
+				21FC1C012B7C4640006E4DBE /* Errors.swift in Sources */,
+				21FC1BFD2B7C4618006E4DBE /* Shell.swift in Sources */,
+				21FC1BFF2B7C462E006E4DBE /* Enums.swift in Sources */,
 				42D247CE299E9D1A00AF878F /* SeniorReviewView.swift in Sources */,
-				42E9C31A2977076200A4CBD9 /* Shell.swift in Sources */,
 				42D247D0299E9EA400AF878F /* AddUserView.swift in Sources */,
-				424FD40129CBB43800E02EAF /* VerifyAdminPassword.swift in Sources */,
-				6DF2C2A529CA2AD600E976D5 /* Keychain.swift in Sources */,
+				21FC1BFB2B7C45FA006E4DBE /* AdminPasswordManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +512,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ResLab.TM-SwiftTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -513,7 +544,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ResLab.TM-SwiftTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -633,33 +664,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		4210B2B929071224000A7F0E /* XCRemoteSwiftPackageReference "DeviceGuru" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/InderKumarRathore/DeviceGuru";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-		422AFACF29E775100053B460 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/devicekit/DeviceKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		4210B2BA29071224000A7F0E /* DeviceGuru */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4210B2B929071224000A7F0E /* XCRemoteSwiftPackageReference "DeviceGuru" */;
-			productName = DeviceGuru;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42C444D129006903000BE3B2 /* Project object */;
 }

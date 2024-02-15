@@ -2,14 +2,14 @@
 //  Shell.swift
 //  TM-SwiftTool
 //
-//  Created by Alex Demerjian (Student Employee) on 1/17/23.
+//  Created by Alex Demerjian on 2/13/24.
 //
 
 import Foundation
-import ServiceManagement
 
-func shell(_ command: String) -> String
-{
+/// Runs the provided command
+public func shell(_ command: String) -> String{
+    
     //create a process and a pipe
     let task = Process()
     
@@ -23,8 +23,8 @@ func shell(_ command: String) -> String
     //set the arguments with the corresponding command
     task.arguments = ["-c", command]
     
-    //set the launch path for the process at "/bin/sh"
-    task.launchPath = "/bin/sh"
+    //set the launch path for the process at "/bin/zsh"
+    task.launchPath = "/bin/zsh"
     
     //set standard input to nil
     task.standardInput = nil
@@ -40,9 +40,10 @@ func shell(_ command: String) -> String
     
     //return the string
     return output
+    
 }
 
-func sudoShell(command: String, argument: String, password: String) -> String {
+public func sudoShell(command: String, argument: String, password: String) -> String {
     
         let taskOne = Process()
         taskOne.launchPath = "/bin/echo"
@@ -69,7 +70,7 @@ func sudoShell(command: String, argument: String, password: String) -> String {
     return output
 }
 
-func sudoShellCreateNewUser(command: String,  password: String, newUserName: String){
+public func sudoShellCreateNewUser(command: String,  password: String, newUserName: String){
     
         let taskOne = Process()
         taskOne.launchPath = "/bin/echo"
