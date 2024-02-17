@@ -39,6 +39,7 @@ struct InfoView: View{
             
             //display info in each column under header
             HStack{
+                
                 VStack{
                     
                     HStack{
@@ -47,7 +48,7 @@ struct InfoView: View{
                         Text(model.hostName ?? "Unknown")
                             
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                     HStack{
@@ -55,7 +56,7 @@ struct InfoView: View{
                             .bold()
                         Text(model.currentUser ?? "Unknown")
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                     HStack{
@@ -63,7 +64,7 @@ struct InfoView: View{
                             .bold()
                         Text(model.osVersion ?? "Unknown")
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                     HStack{
@@ -71,10 +72,11 @@ struct InfoView: View{
                             .bold()
                         Text(model.model?.description ?? "Unknown")
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                 }
+                
                 VStack{
                     
                     HStack{
@@ -82,7 +84,7 @@ struct InfoView: View{
                             .bold()
                         Text(model.serialNumber ?? "Unknown")
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                     
@@ -91,7 +93,7 @@ struct InfoView: View{
                             .bold()
                         Text(model.processor ?? "Unknown")
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                     HStack{
@@ -99,7 +101,7 @@ struct InfoView: View{
                             .bold()
                         Text(model.ramInfo ?? "Unknown")
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                     HStack{
@@ -107,7 +109,7 @@ struct InfoView: View{
                             .bold()
                         Text(model.storageInfo ?? "Unknown")
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 5)
                     
                 }

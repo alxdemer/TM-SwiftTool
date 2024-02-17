@@ -504,7 +504,7 @@
 				DEVELOPMENT_TEAM = 225WY9GR2W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "TM-SwfitTool";
+				INFOPLIST_KEY_CFBundleDisplayName = "TM-SwiftTool";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -536,7 +536,7 @@
 				DEVELOPMENT_TEAM = 225WY9GR2W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "TM-SwfitTool";
+				INFOPLIST_KEY_CFBundleDisplayName = "TM-SwiftTool";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (

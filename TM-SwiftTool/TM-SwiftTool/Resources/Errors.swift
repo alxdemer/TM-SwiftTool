@@ -28,17 +28,15 @@ enum ConversionError: LocalizedError{
 }
 
 enum AdminPasswordManagerError: LocalizedError{
-    case failedToAddItem
-    case failedToRetrieveItem
-    case failedToExtractAdminPassword
-    case failedToDeleteItem
+    case failedToStoreAdminPassword
+    case failedToGetAdminPassword
+    case noAdminPasswordStoredInKeychain
     
     var errorDescription: String?{
         switch self{
-        case .failedToAddItem: "Failed to add the item to keychain."
-        case .failedToRetrieveItem: "Failed to retrieve an item from keychain using the specified query."
-        case .failedToExtractAdminPassword: "Failed to extract the admin password from the keychain item."
-        case .failedToDeleteItem: "Failed to delete an item from keychain using the specified query."
+        case .failedToStoreAdminPassword: return "Failed to store the admin password in keychain."
+        case .failedToGetAdminPassword: return "Failed to get admin password from keychain."
+        case .noAdminPasswordStoredInKeychain: return "There is no admin password that is currently stored in keychain."
         }
     }
 }

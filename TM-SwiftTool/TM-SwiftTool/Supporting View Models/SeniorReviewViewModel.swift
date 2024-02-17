@@ -14,12 +14,13 @@ public class SeniorReviewViewModel: ObservableObject, SeniorReviewDelegate{
     @Published var seniorReviewResults: [SeniorReviewResult] = []
     @Published var isPlaying = false
     @Published var isPerformingSeniorReview = false
-    @Published var disableSeniorReviewButton = false
+    @Published var disableButtons = false
     @Published var showAlert = false
     @Published var alertMessage = ""
     
-    public func startSeniorReview() async {
+    public func startSeniorReview() async{
         DispatchQueue.main.async{
+            self.disableButtons = true
             self.isPerformingSeniorReview = true
         }
         await seniorReview.start()
@@ -27,6 +28,7 @@ public class SeniorReviewViewModel: ObservableObject, SeniorReviewDelegate{
     
     public func seniorReviewComplete(seniorReviewResults: [SeniorReviewResult]) {
         DispatchQueue.main.async{
+            self.disableButtons = false
             self.isPerformingSeniorReview = false
             self.seniorReviewResults = seniorReviewResults
         }

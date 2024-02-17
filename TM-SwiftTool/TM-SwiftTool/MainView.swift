@@ -43,25 +43,20 @@ struct MainView: View{
         }
         .presentedWindowToolbarStyle(.automatic)
         
-        ScrollView{
+        VStack{
             
-            VStack{
+            Text("Version 2.0")
+            Text("© 2024 RIT ITS")
+            HStack{
                 
-                Text("Version 2.0")
-                Text("© 2024 RIT ITS")
-                HStack{
-                    
-                    Text("Contributors: ")
-                        .bold()
-                    Text("Alex Demerjian")
-                }
-                .padding(100)
-                
+                Text("Contributors: ")
+                    .bold()
+                Text("Alex Demerjian")
             }
-            .padding()
+            .padding(25)
             
         }
-        
+        .padding()
         
     }
     

@@ -13,55 +13,57 @@ struct AddUserView: View{
     
     var body: some View{
         
-        VStack{
+        ZStack{
             
-            HStack{
-                Image(systemName: "person.crop.circle.badge.plus")
-                    .resizable()
-                    .frame(width: 36, height: 30)
-            }
-            .padding()
-            
-            
-            Text("Please enter the username for the new user and your admin password.")
-                .padding([.leading, .trailing], 100)
-            
-            TextField("New Username", text: $model.newUserName)
-                .padding([.leading, .trailing], 100)
-            
-            SecureField("Your Password", text: $model.adminPassword)
-                .padding([.leading, .trailing], 100)
-                .onSubmit {
-                    Task.init(){
-                        await model.addUser()
-                    }
-                }
-            
-            HStack{
+            VStack{
                 
-                Button(action: {
-                    Task.init(){
-                        await model.addUser()
-                    }
-                    
-                }, label: {Text("Add")})
-                .buttonStyle(.borderedProminent)
-                .disabled(model.isAddingUser)
+                HStack{
+                    Image(systemName: "person.crop.circle.badge.plus")
+                        .resizable()
+                        .frame(width: 36, height: 30)
+                }
                 .padding()
-            }
-            
-            HStack{
                 
-                if model.isAddingUser == true{
+                Text("Please enter the username for the new user and your admin password.")
+                    .padding([.leading, .trailing], 100)
+                
+                TextField("New Username", text: $model.newUserName)
+                    .padding([.leading, .trailing], 100)
+                
+                SecureField("Your Password", text: $model.adminPassword)
+                    .padding([.leading, .trailing], 100)
+                    .onSubmit {
+                        Task.init(){
+                            await model.addUser()
+                        }
+                    }
+                
+                HStack{
                     
-                    Text("Adding User")
-                    
-                    ProgressView().progressViewStyle(.circular)
-                        .scaleEffect(0.5)
+                    Button(action: {
+                        Task.init(){
+                            await model.addUser()
+                        }
+                        
+                    }, label: {Text("Add")})
+                    .buttonStyle(.borderedProminent)
+                    .disabled(model.isAddingUser)
+                    .padding()
                 }
+                
             }
-            .padding()
             
+            if model.isAddingUser{
+                
+                HStack{
+                    ProgressView("Adding New User")
+                        .progressViewStyle(.circular)
+                }
+                .padding()
+                .background(.clear)
+                .clipShape(.rect(cornerRadius: 8))
+                
+            }
             
         }
         .alert(model.alertMessage, isPresented: $model.showAlert){

@@ -47,6 +47,7 @@ public class SeniorReview{
         var seniorReviewResults: [SeniorReviewResult] = []
         
         async let appsResults = verifyApps()
+        async let verifyWifiNetworkResult = verifyWifiNetwork()
         async let verifyStorageHealthResult = verifyStorageHealth()
         async let verifyBatteryHealthResult = verifyBatteryHealth()
         
@@ -56,6 +57,7 @@ public class SeniorReview{
         let _ = shell("killall FaceTime")
         
         await seniorReviewResults += appsResults
+        await seniorReviewResults.append(verifyWifiNetworkResult)
         await seniorReviewResults.append(verifyStorageHealthResult)
         await seniorReviewResults.append(verifyBatteryHealthResult)
         
@@ -87,7 +89,7 @@ public class SeniorReview{
     
     /// Verifies that the correct apps are installed.
     ///
-    /// - Returns: An array of Result enums indicating if each app is installed.
+    /// - Returns: An array of SeniorReviewResult enums indicating if each app is installed.
     private func verifyApps() async -> [SeniorReviewResult] {
         
         var results: [SeniorReviewResult] = []
@@ -149,9 +151,27 @@ public class SeniorReview{
         
     }
     
-    /// Verifies the health of the storage via the "diskutil info /dev/disk0" shell command
+    /// Verifies that the Mac is connected to the correct wifi network via the "networksetup -getairportnetwork en0" shell command.
     ///
-    /// - Returns: Result enum indicating the storage health.
+    /// - Returns: SeniorReviewResult enum indicating if the Mac is connected to the correct wifi network.
+    private func verifyWifiNetwork() async -> SeniorReviewResult{
+        
+        let wifiNetworkInfo = shell("networksetup -getairportnetwork en0")
+        
+        //get the name of the network
+        let start = wifiNetworkInfo.index(after: wifiNetworkInfo.range(of: "Current Wi-Fi Network:")!.upperBound)
+        let wifiNetworkName = wifiNetworkInfo[start..<wifiNetworkInfo.index(before: wifiNetworkInfo.endIndex)]
+        
+        if wifiNetworkName == "eduroam"{
+            return SeniorReviewResult.success(details: "Connected to eduroam.")
+        }else{
+            return SeniorReviewResult.failure(details: "Not connected to eduroam.")
+        }
+    }
+    
+    /// Verifies the health of the storage via the "diskutil info /dev/disk0" shell command.
+    ///
+    /// - Returns: SeniorReviewResult enum indicating the storage health.
     private func verifyStorageHealth() async -> SeniorReviewResult{
         
         //get drive info
@@ -176,7 +196,7 @@ public class SeniorReview{
     
     /// Verifies the battery health via the "system_profiler SPPowerDataType" shell command.
     ///
-    /// - Returns: Result enum indicating the battery health.
+    /// - Returns: SeniorReviewResult enum indicating the battery health.
     private func verifyBatteryHealth() async -> SeniorReviewResult{
         
         //get power info
