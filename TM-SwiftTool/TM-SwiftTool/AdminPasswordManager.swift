@@ -19,6 +19,8 @@ public class AdminPasswordManager{
         //if the admin password is already stored in keychain, return true
         if let storedAdminPassword = getFromKeychain(), storedAdminPassword == adminPassword{
             
+            print("Admin password already in keychain.")
+            
             return true
             
         }else{
@@ -36,8 +38,10 @@ public class AdminPasswordManager{
             
             // return if admin password was stored successfully
             if status == errSecSuccess{
+                print("Added to keychain")
                 return true
             }else{
+                print("Failed to add to keychain")
                 return false
             }
             

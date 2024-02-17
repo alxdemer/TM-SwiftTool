@@ -142,9 +142,9 @@ public class SeniorReview{
         }
         
         if macOSInstalledApps.contains("Jamf Connect.app"){
-            results.append(SeniorReviewResult.success(details: "Jamp Connect is installed."))
+            results.append(SeniorReviewResult.success(details: "Jamf Connect is installed."))
         }else{
-            results.append(SeniorReviewResult.failure(details: "Jamp Connect is not installed."))
+            results.append(SeniorReviewResult.failure(details: "Jamf Connect is not installed."))
         }
         
         return results

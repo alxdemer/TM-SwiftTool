@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddUserView: View{
     
-    @State var model = AddUserViewModel()
+    @StateObject var model = AddUserViewModel()
     
     var body: some View{
         
