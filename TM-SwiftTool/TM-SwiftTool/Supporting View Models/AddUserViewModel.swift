@@ -18,8 +18,10 @@ public class AddUserViewModel: ObservableObject{
     
     public func addUser() async{
         
-        alertMessage = ""
-        isAddingUser = true
+        //set is adding user to true
+        DispatchQueue.main.async{
+            self.isAddingUser = true
+        }
         
         do{
             
@@ -35,7 +37,9 @@ public class AddUserViewModel: ObservableObject{
             }
             
             //wipe the adminPassword variable
-            adminPassword = ""
+            DispatchQueue.main.async{
+                self.adminPassword = ""
+            }
             
             //verify that the admin password they provided is correct
             guard try adminPasswordManager.verifyAdminPassword() == true else{
@@ -60,7 +64,7 @@ public class AddUserViewModel: ObservableObject{
             }
             
             //create the new user
-            sudoShellCreateNewUser(command: "/System/Library/CoreServices/ManagedClient.app/Contents/Resources/createmobileaccount", password: adminPassword, newUserName: newUserName)
+            sudoShellCreateNewUser(command: "sysadminctl", password: adminPassword, newUserName: newUserName)
             
             //check if the new user was added
             let userAdded = shell("dscl . -list /Users").contains(newUserName)
@@ -86,11 +90,14 @@ public class AddUserViewModel: ObservableObject{
             }
             
         }catch{
+            
+            //set the alert message to the error description and show the alert
             DispatchQueue.main.async{
                 self.alertMessage = error.localizedDescription
                 self.showAlert = true
             }
             return
+            
         }
         
     }

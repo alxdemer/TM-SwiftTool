@@ -57,10 +57,11 @@ struct AddUserView: View{
                 
                 HStack{
                     ProgressView("Adding New User")
+                        .foregroundColor(.black)
                         .progressViewStyle(.circular)
                 }
                 .padding()
-                .background(.clear)
+                .background(Color(NSColor(red: 0.9, green: 0.5, blue: 0.01, alpha: 0.5)))
                 .clipShape(.rect(cornerRadius: 8))
                 
             }

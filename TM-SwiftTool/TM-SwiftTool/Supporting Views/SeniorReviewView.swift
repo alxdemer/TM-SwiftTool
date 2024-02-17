@@ -88,10 +88,11 @@ struct SeniorReviewView: View{
                 
                 HStack{
                     ProgressView("Performing Senior Review")
+                        .foregroundColor(.black)
                         .progressViewStyle(.circular)
                 }
                 .padding()
-                .background(.clear)
+                .background(Color(NSColor(red: 0.9, green: 0.5, blue: 0.01, alpha: 0.5)))
                 .clipShape(.rect(cornerRadius: 8))
                 
             }
