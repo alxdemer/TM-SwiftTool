@@ -63,16 +63,27 @@ public class AddUserViewModel: ObservableObject{
                 
             }
             
-            //create the new user
-            sudoShellCreateNewUser(command: "sysadminctl", password: adminPassword, newUserName: newUserName)
+            //create the new user folder
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)", password: adminPassword)
+            
+            //add essential folders/directories in new user folder
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Library", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "'/Users/\(newUserName)/Library/Application Support'", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "'/Users/\(newUserName)/Library/Group Containers'", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Desktop", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Documents", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Downloads", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Movies", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Music", password: adminPassword)
+            let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Pictures", password: adminPassword)
             
             //check if the new user was added
-            let userAdded = shell("dscl . -list /Users").contains(newUserName)
+            let users = shell("dscl . -list /Users")
             
             //let the user know if the new user was added
             DispatchQueue.main.async {
                 
-                if userAdded{
+                if users.contains(self.newUserName){
                     
                     self.newUserName = ""
                     self.alertMessage = "Successfully added user!"

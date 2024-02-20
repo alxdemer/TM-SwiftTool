@@ -69,28 +69,3 @@ public func sudoShell(command: String, argument: String, password: String) -> St
     
     return output
 }
-
-public func sudoShellCreateNewUser(command: String,  password: String, newUserName: String){
-    
-        let taskOne = Process()
-        taskOne.launchPath = "/bin/echo"
-        taskOne.arguments = [password]
-
-        let taskTwo = Process()
-        taskTwo.launchPath = "/usr/bin/sudo"
-        taskTwo.arguments = ["-k", "-S", command, "-addUser", newUserName]
-
-        let pipeBetween:Pipe = Pipe()
-        taskOne.standardOutput = pipeBetween
-        taskTwo.standardInput = pipeBetween
-
-        let pipeToMe = Pipe()
-        taskTwo.standardOutput = pipeToMe
-        taskTwo.standardError = pipeToMe
-
-        taskOne.launch()
-        taskTwo.launch()
-
-        let data = pipeToMe.fileHandleForReading.readDataToEndOfFile()
-        let _ : String = NSString(data: data, encoding: String.Encoding.utf8.rawValue)! as String
-}
