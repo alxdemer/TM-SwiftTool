@@ -17,10 +17,12 @@ struct InfoView: View{
             //dispay headers for system info column and hardware info column
             HStack{
                 HStack{
+                    
                     Image(systemName: "gearshape.2.fill")
                     Text("System Info")
                         .underline()
                         .font(.system(size: 15, weight: .bold))
+                    
                 }
                 .frame(maxWidth: .infinity, alignment: .center)
                 

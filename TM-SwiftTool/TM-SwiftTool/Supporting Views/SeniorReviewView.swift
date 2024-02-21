@@ -85,16 +85,14 @@ struct SeniorReviewView: View{
             }
             
             if model.isPerformingSeniorReview{
-                
                 HStack{
                     ProgressView("Performing Senior Review")
                         .foregroundColor(.black)
                         .progressViewStyle(.circular)
                 }
                 .padding()
-                .background(Color(NSColor(red: 0.9, green: 0.5, blue: 0.01, alpha: 0.5)))
+                .background(.gray)
                 .clipShape(.rect(cornerRadius: 8))
-                
             }
             
         }

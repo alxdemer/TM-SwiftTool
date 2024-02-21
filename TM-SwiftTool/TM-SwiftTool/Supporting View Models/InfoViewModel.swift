@@ -20,14 +20,17 @@ public class InfoViewModel: ObservableObject{
     
     init(){
         
+        //get the hostname
         var hostname = ProcessInfo.processInfo.hostName
-        
         if let endIndex = hostname.range(of: "."){
             hostname = String(hostname.prefix(upTo: endIndex.lowerBound))
         }
-        
         self.hostName = hostname
+        
+        //get the current user
         self.currentUser = NSUserName()
+        
+        //get the os version
         self.osVersion = ProcessInfo.processInfo.operatingSystemVersionString
         
         Task.init{

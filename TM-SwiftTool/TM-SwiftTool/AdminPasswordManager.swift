@@ -13,16 +13,52 @@ public class AdminPasswordManager{
     
     /// Stores the provided admin password into keychain.
     ///
+    /// - If the keychain item already exists, it will check to verify that the value matches the admin password provided. If it does, it will return true. Otherwise, it will update the value
+    /// - If the keychain item does not already exists, it will create it and set the value to the admin password provided
+    ///
     /// - Returns: Bool indicating if the admin password is stored in keychain.
     public func storeInKeychain(adminPassword: String) -> Bool {
         
-        //if the admin password is already stored in keychain, return true
-        if let storedAdminPassword = getFromKeychain(), storedAdminPassword == adminPassword{
+        //check if there is already an entry in keychain
+        if let storedAdminPassword = getFromKeychain(){
             
-            print("Admin password already in keychain.")
+            //if the entry contains a value equal to the new admin password, return true
+            if storedAdminPassword == adminPassword{
+                
+                return true
+                
+            //if it is not equal to the new admin password, update it
+            }else{
+                
+                //define the existing keychain item attributes
+                let query: [String: Any] = [
+                    kSecClass as String: kSecClassGenericPassword,
+                    kSecAttrService as String: "ResLab.TM-SwiftTool",
+                    kSecAttrAccount as String: NSUserName(),
+                    kSecMatchLimit as String: kSecMatchLimitOne,
+                    kSecReturnAttributes as String: true,
+                    kSecReturnData as String: true
+                ]
+                
+                //define the attributes to update
+                let attributesToUpdate: [String: Any] = [
+                    kSecValueData as String: adminPassword.data(using: .utf8)!
+                ]
+                
+                //update the value of the key
+                let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
+                
+                if status == errSecSuccess {
+                    print("Keychain item updated.")
+                    return true
+                } else {
+                    print("Error updating keychain item: \(status)")
+                    return false
+                }
+                
+            }
             
-            return true
-            
+        //otherwise create a new entry in keychain and store the new admin password in it
         }else{
             
             // Define query parameters
@@ -38,20 +74,20 @@ public class AdminPasswordManager{
             
             // return if admin password was stored successfully
             if status == errSecSuccess{
-                print("Added to keychain")
+                print("Added to keychain.")
                 return true
             }else{
-                print("Failed to add to keychain")
+                print("Failed to add to keychain: \(status)")
                 return false
             }
             
         }
         
     }
-
+    
     /// Attemps to get the admin password from keychain.
     ///
-    /// - Returns: String representation of the password. Nil if could not retrieve the password.
+    /// - Returns: String representation of the password. Nil if the password does not exist in keychain or if failled to retrieve the password.
     public func getFromKeychain() -> String? {
         
         // Define query parameters

@@ -47,6 +47,7 @@ public class AddUserViewModel: ObservableObject{
                 DispatchQueue.main.async{
                     self.alertMessage = "Incorrect admin password. Please try again."
                     self.showAlert = true
+                    self.isAddingUser = false
                 }
                 return
                 
@@ -68,8 +69,6 @@ public class AddUserViewModel: ObservableObject{
             
             //add essential folders/directories in new user folder
             let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Library", password: adminPassword)
-            let _ = sudoShell(command: "mkdir", argument: "'/Users/\(newUserName)/Library/Application Support'", password: adminPassword)
-            let _ = sudoShell(command: "mkdir", argument: "'/Users/\(newUserName)/Library/Group Containers'", password: adminPassword)
             let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Desktop", password: adminPassword)
             let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Documents", password: adminPassword)
             let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Downloads", password: adminPassword)
@@ -78,7 +77,7 @@ public class AddUserViewModel: ObservableObject{
             let _ = sudoShell(command: "mkdir", argument: "/Users/\(newUserName)/Pictures", password: adminPassword)
             
             //check if the new user was added
-            let users = shell("dscl . -list /Users")
+            let users = shell("ls /Users")
             
             //let the user know if the new user was added
             DispatchQueue.main.async {
