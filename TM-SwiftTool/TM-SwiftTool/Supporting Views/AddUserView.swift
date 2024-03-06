@@ -54,16 +54,7 @@ struct AddUserView: View{
             }
             
             if model.isAddingUser{
-                
-                HStack{
-                    ProgressView("Adding New User")
-                        .foregroundColor(.black)
-                        .progressViewStyle(.circular)
-                }
-                .padding()
-                .background(.gray)
-                .clipShape(.rect(cornerRadius: 8))
-                
+                LoadingView(progressViewTitle: "Adding New User...")
             }
             
         }

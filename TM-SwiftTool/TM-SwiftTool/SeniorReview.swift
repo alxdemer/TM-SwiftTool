@@ -47,6 +47,7 @@ public class SeniorReview{
         var seniorReviewResults: [SeniorReviewResult] = []
         
         async let appsResults = verifyApps()
+        async let verifyUpdatesInstalled = verifyUpdatesInstalled()
         async let verifyWifiNetworkResult = verifyWifiNetwork()
         async let verifyStorageHealthResult = verifyStorageHealth()
         async let verifyBatteryHealthResult = verifyBatteryHealth()
@@ -57,6 +58,7 @@ public class SeniorReview{
         let _ = shell("killall FaceTime")
         
         await seniorReviewResults += appsResults
+        await seniorReviewResults.append(verifyUpdatesInstalled)
         await seniorReviewResults.append(verifyWifiNetworkResult)
         await seniorReviewResults.append(verifyStorageHealthResult)
         await seniorReviewResults.append(verifyBatteryHealthResult)
@@ -148,6 +150,21 @@ public class SeniorReview{
         }
         
         return results
+        
+    }
+    
+    /// Verifies all updates have been installed.
+    ///
+    /// - Returns: SeniorReviewResult enum indicating if the Mac's software is all up to date.
+    private func verifyUpdatesInstalled() async -> SeniorReviewResult{
+        
+        let softwareUpdateStatus = shell("softwareupdate -l")
+        
+        if softwareUpdateStatus.contains("No new software available."){
+            return SeniorReviewResult.success(details: "All software is up to date.")
+        }else{
+            return SeniorReviewResult.failure(details: "There are pending software updates.")
+        }
         
     }
     

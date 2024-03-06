@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ServiceManagement
 
 /// Runs the provided command
 public func shell(_ command: String) -> String{
@@ -44,7 +45,7 @@ public func shell(_ command: String) -> String{
 }
 
 public func sudoShell(command: String, argument: String, password: String) -> String {
-    
+        
         let taskOne = Process()
         taskOne.launchPath = "/bin/echo"
         taskOne.arguments = [password]
@@ -69,3 +70,5 @@ public func sudoShell(command: String, argument: String, password: String) -> St
     
     return output
 }
+
+

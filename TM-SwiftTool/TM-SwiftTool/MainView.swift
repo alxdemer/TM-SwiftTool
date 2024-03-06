@@ -39,6 +39,10 @@ struct MainView: View{
                 .tabItem{
                 Label("Add User", systemImage: "person.crop.circle.badge.plus")
             }
+            ScriptsView()
+                .tabItem {
+                Label("Scripts", systemImage: "applescript")
+            }
             
         }
         .presentedWindowToolbarStyle(.automatic)
